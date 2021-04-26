@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": [
+      "ES6"
+    ],
+    "allowJs": false,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@database/*": [
+        "./src/database/*"
+      ],
+      "@views/*": [
+        "./src/views/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@errors/*": [
+        "./src/errors/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@middlewares/*": [
+        "./src/middlewares/*"
+      ],
+    },
+    "removeComments": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/@types"
+    ],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false
+  },
+  "exclude": [
+    "./coverage/**/*",
+    "./dist/**/*",
+    "./node_modules/**/*",
+    "./*.config.js"
+  ]
+}

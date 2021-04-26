@@ -1,0 +1,17 @@
+# Tecnologias
+
+- Next.js
+- TailwindCSS
+- Axios
+
+# Paginas prontas
+
+[x] PAGINA DE LOGIN
+
+[x] PAGINA DE REGISTRO
+
+[x] PAGINA DE ESQUECEU A SENHA
+
+[x] PAGINA PARA CONFIRMAÇÃO DE E-MAIL
+
+[x] PAGINAS 404 E 500 CUSTOMIZADAS

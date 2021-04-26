@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator NodeJS</title>
+  <link rel="stylesheet" href="/styles/pages/signup.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      Register new an account
+    </h1>
+    <form action="/signup" method="POST">
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input placeholder="Nome" type="text" id="name" name="name" />
+          </div>
+
+          <div class="input-wrapper">
+            <input type="text" name="username" id="username" placeholder="Nome de usuário">
+          </div>
+        </div>
+
+        <div class="input-wrapper" style="width: 100%; margin-bottom: 1rem;">
+          <input type="email" name="email" id="email" placeholder="E-mail">
+        </div>
+
+        <div class="input-wrapper" style="width: 100%; margin-bottom: 1rem;">
+          <input type="password" name="password" id="password" placeholder="Senha">
+        </div>
+
+        <div class="input-wrapper" style="width: 100%; margin-bottom: 1rem;">
+          <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar senha">
+        </div>
+
+        <button type="submit" class="btn1">Register</button>
+      </div>
+    </form>
+    <div style="display: flex; flex-direction: column; margin-top: 1.4rem;">
+      <p>Do you have already account?</p>
+    </div>
+    <a href="/sign" class="btn btn-bb">Sign in</a>
+  </div>
+</body>
+
+</html>

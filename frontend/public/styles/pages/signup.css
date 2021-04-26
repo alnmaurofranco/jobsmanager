@@ -1,0 +1,120 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container h1 {
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+a {
+  opacity: 1;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 1.1rem 11.6rem;
+  background-color: rgb(17, 17, 17);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  font-size: 17px;
+  font-weight: 700;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #009688;
+  font-weight: bold;
+  opacity: 0.95;
+}
+
+.btn-green {
+  background-color: rgb(65 152 54);
+}
+
+.btn-bb {
+  background-color: #009688;
+}
+
+.logo-img {
+  width: 800px;
+  height: auto;
+  margin-bottom: 1.7rem;
+}
+
+.btn1 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 1.1rem 12rem;
+  background-color: rgb(17, 17, 17);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  font-size: 17px;
+  font-weight: 700;
+  transition: all 0.3s ease 0s;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.btn1:hover {
+  background-color: rgb(17, 17, 17);
+  font-weight: bold;
+  opacity: 0.95;
+}
+
+form .input-group {
+  display: flex;
+  margin-top: 1.5rem;
+}
+
+.input-wrapper {
+  width: 89%;
+}
+
+form .input-group .input-wrapper + .input-wrapper {
+  margin-left: 3.8rem;
+  margin-bottom: 1rem;
+}
+
+input {
+  font-family: IBM Plex Sans;
+  font-weight: 500;
+  background: #fcfdff;
+  border: 1px solid #e1e3e6;
+  border-radius: 0.313rem;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  color: #000;
+  font-size: 17px;
+}
+
+input:hover {
+  outline: 1px solid #000;
+  border-radius: 0.313rem;
+}
+
+input:focus-within {
+  outline: 1px solid #009688;
+  border-radius: 0.313rem;
+}
+
+::placeholder {
+  color: #bfbfcc;
+}
