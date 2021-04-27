@@ -16,16 +16,17 @@ interface IJobData {
 interface IConstantContextState {
   updateJob: (data: IJobData) => void;
   createJob: (data: IJobData) => void;
+  deleteJob: (id: number) => void;
 }
 
 export const ConstantContext = createContext<IConstantContextState>({} as IConstantContextState);
 
 export const ConstantProvider: React.FC = ({ children }) => {
   const router = useRouter()
-  const token = Cookie.get('token')
 
   const updateJob = useCallback(async ({ id, name, dailyHours, totalHours }: IJobData) => {
     try {
+      const token = Cookie.get('token')
 
       const response = await api.put(`job/${id}/update`, {
         name,
@@ -49,6 +50,8 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
   const createJob = useCallback(async ({ name, dailyHours, totalHours }: IJobData) => {
     try {
+      const token = Cookie.get('token')
+
       const response = await api.post('job', {
         name,
         daily_hours: dailyHours,
@@ -60,8 +63,8 @@ export const ConstantProvider: React.FC = ({ children }) => {
       })
 
       MySwal.fire({
-        title: 'Seu job foi cadastrado!',
-        text: response.data,
+        title: 'JOB cadastrado!',
+        text: 'Você acabou de adicionar um novo job.',
         icon: "success",
       })
 
@@ -75,10 +78,30 @@ export const ConstantProvider: React.FC = ({ children }) => {
     }
   }, [])
 
+  const deleteJob = useCallback(async (id: number) => {
+    try {
+      const token = Cookie.get('token')
+      const response = await api.delete(`job/${id}/delete`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      router.push('/dashboard');
+    } catch (error) {
+      MySwal.fire({
+        title: 'Ops!',
+        text: error.response.data,
+        icon: "error",
+      })
+    }
+  }, [])
+
   return (
     <ConstantContext.Provider value={{
       createJob,
-      updateJob
+      updateJob,
+      deleteJob
     }}>
       {children}
     </ConstantContext.Provider>

@@ -2,6 +2,10 @@ import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import { getCustomRepository } from 'typeorm';
 import { compare, hash } from 'bcryptjs';
+import { UserProfileRepository } from '@database/repositories/UserProfileRepository';
+import User from '@database/entities/User';
+import UserProfile from '@database/entities/UserProfile';
+import { calculateValueHour } from '@utils/JobUtils';
 
 interface IRequest {
   user_id: string;
@@ -11,13 +15,19 @@ interface IRequest {
   email?: string;
   old_password?: string;
   password?: string;
+  monthly_budget?: number;
+  days_per_week?: number;
+  hours_per_day?: number;
+  vacation_per_year?: number;
 }
 
 class UpdateProfileService {
   private ormRepository = getCustomRepository(UserRepository);
+  private userProfileRepository = getCustomRepository(UserProfileRepository);
 
   constructor() {
     this.ormRepository;
+    this.userProfileRepository;
   }
 
   public async execute({
@@ -28,7 +38,11 @@ class UpdateProfileService {
     email,
     old_password,
     password,
-  }: IRequest): Promise<any> {
+    monthly_budget,
+    days_per_week,
+    hours_per_day,
+    vacation_per_year,
+  }: IRequest): Promise<User> {
     const user = await this.ormRepository.findUserById(user_id);
 
     if (!user) {
@@ -43,8 +57,6 @@ class UpdateProfileService {
 
     user.username = username;
     user.email = email;
-    user.profile.name = name;
-    user.profile.avatar = avatar;
 
     if (password && !old_password) {
       throw new HttpException(
@@ -63,7 +75,36 @@ class UpdateProfileService {
       user.password = await hash(password, 8);
     }
 
-    return this.ormRepository.save(user);
+    await this.ormRepository.save(user);
+
+    const userProfile = await this.userProfileRepository.findOne({
+      where: {
+        user,
+      },
+    });
+
+    userProfile.name = name;
+    userProfile.avatar = avatar;
+    userProfile.monthly_budget = monthly_budget;
+    userProfile.days_per_week = days_per_week;
+    userProfile.hours_per_day = hours_per_day;
+    userProfile.vacation_per_year = vacation_per_year;
+
+    const valueHour = calculateValueHour(
+      userProfile.vacation_per_year,
+      userProfile.hours_per_day,
+      userProfile.days_per_week,
+      userProfile.monthly_budget
+    );
+
+    userProfile.value_hour = valueHour;
+
+    await this.userProfileRepository.save(userProfile);
+
+    return {
+      ...user,
+      profile: userProfile,
+    };
   }
 }
 

@@ -42,9 +42,9 @@ class DashboardService {
       },
     });
 
-    if (jobs.length === 0 || jobs.length <= 0) {
-      throw new HttpException(404, 'not found jobs');
-    }
+    // if (jobs.length === 0 || jobs.length <= 0) {
+    //   throw new HttpException(404, 'not found jobs');
+    // }
 
     const statusCount = {
       progress: 0,

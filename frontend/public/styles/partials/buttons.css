@@ -9,12 +9,12 @@
   line-height: 1.625rem;
   text-transform: uppercase;
 
-  transition: all .2s;
+  transition: all 0.2s;
 
-  cursor:pointer;
+  cursor: pointer;
 
   display: inline-flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -28,7 +28,7 @@ button.button {
 }
 
 .button.orange:hover {
-  background: #FA9C2D
+  background: #fa9c2d;
 }
 
 .button.green {
@@ -37,7 +37,7 @@ button.button {
 }
 
 .button.green:hover {
-  background: #3CC73C;
+  background: #3cc73c;
 }
 
 .button.gray {
@@ -46,7 +46,7 @@ button.button {
 }
 
 .button.gray:hover {
-  background: #ECEEF0;
+  background: #eceef0;
 }
 
 .button.red {
@@ -55,25 +55,21 @@ button.button {
 }
 
 .button.red:hover {
-  background: #FA3F38;
+  background: #fa3f38;
 }
 
 .button.white {
-  background: #FCFDFF;
-  border: 1px solid #E1E3E6;
+  background: #fcfdff;
+  border: 1px solid #e1e3e6;
 }
 
 .button.white:hover {
-  background: #F0F2F5;
+  background: #f0f2f5;
 }
 
 .button-group {
   display: flex;
   align-items: center;
-}
-
-.button + .button {
-  margin-left: 1rem;
 }
 
 .actions .button {

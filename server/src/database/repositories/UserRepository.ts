@@ -18,7 +18,6 @@ class UserRepository extends Repository<User> {
       where: {
         id,
       },
-      relations: ['profile'],
     });
 
     return user;

@@ -35,12 +35,16 @@ interface ISignInCredentials {
 }
 
 interface IUserProfileData {
-  username: string;
-  name: string;
-  avatar: string;
-  email: string;
-  old_password: string;
-  password: string;
+  username?: string;
+  name?: string;
+  avatar?: string;
+  email?: string;
+  old_password?: string;
+  password?: string;
+  monthlyBudget?: number;
+  hoursPerDay?: number;
+  daysPerWeek?: number;
+  vacationPerYear?: number;
 }
 
 interface IAuthContextState {
@@ -70,7 +74,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const [data, setData] = useState<IAuthState>(() => {
     if (process.browser) {
-      //const token = localStorage.getItem('@JobsManager:token')
       const token = Cookie.get('token')
       const user = localStorage.getItem('@JobsManager:user')
 
@@ -111,7 +114,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       const { token, user } = response.data
 
-      //localStorage.setItem('@JobsManager:token', token)
       Cookie.set('token', token, {
         expires: addMinutes(new Date(), 15),
       });
@@ -175,7 +177,42 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const toggleConfirmPasswordVisiblity = () => setConfirmPasswordShown(!confirmPasswordShown)
 
-  const updateProfile = useCallback(async () => { }, [])
+  const updateProfile = useCallback(async ({ name, avatar, email, username, monthlyBudget, hoursPerDay, daysPerWeek, vacationPerYear }: IUserProfileData) => {
+    try {
+      const token = Cookie.get('token')
+
+      const response = await api.put('profile/update', {
+        name,
+        avatar,
+        email,
+        username,
+        monthly_budget: monthlyBudget,
+        days_per_week: daysPerWeek,
+        hours_per_day: hoursPerDay,
+        vacation_per_year: vacationPerYear,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      MySwal.fire({
+        title: 'Perfil atualizado',
+        text: 'Você acabou de realizar atualização do perfil.',
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1100
+      })
+
+      router.push('/dashboard/profile')
+    } catch (error) {
+      MySwal.fire({
+        title: 'Ops!',
+        text: error.response.data,
+        icon: "error",
+      })
+    }
+  }, [])
 
   return (
     <AuthContext.Provider value={{

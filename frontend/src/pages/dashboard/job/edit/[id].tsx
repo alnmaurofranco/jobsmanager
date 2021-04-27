@@ -122,7 +122,7 @@ export default function EditJob({ job }: IJobData) {
           <p>Preencha os dados ao lado para ver o valor do projeto</p>
           <div className="button-group">
             <button
-              className="button green"
+              className="button green mr-2 focus:outline-none"
               form="form-job"
               type="submit"
               title="Salvar Dados"
@@ -130,7 +130,7 @@ export default function EditJob({ job }: IJobData) {
               Salvar
               </button>
             <Link href="/dashboard">
-              <a className="button gray">
+              <a className="button gray focus:outline-none">
                 <img
                   src="/images/trash-24.svg"
                   alt="Cancelar"

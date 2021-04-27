@@ -1,10 +1,11 @@
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState } from 'react';
 import { api } from '../../services/api'
-import { FiPower } from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi'
 import { useAuth } from '../../hooks/AuthContext';
+import { useConstant } from '../../hooks/ConstantContext';
 
 interface IJobs {
   id: number;
@@ -39,9 +40,14 @@ interface IDashboardData {
 
 function Dashboard({ data }) {
   const { signOut } = useAuth()
+  const { deleteJob } = useConstant()
   const [modal, setModal] = useState(false)
+  const [joob, setJoob] = useState(0)
   const dashData: IDashboardData = data
 
+  // const handleDeleteJob = useCallback(async (id: number) => {
+
+  // }, [deleteJob])
   return (
     <div id="page-index">
       <Head>
@@ -73,13 +79,15 @@ function Dashboard({ data }) {
                 <p>
                   {dashData.profile.name} <span>Ver perfil</span>
                 </p>
-                <img src={`https://ui-avatars.com/api/?name=${dashData.profile.name}&size=180&background=random`} />
+                <img src={`${dashData.profile.avatar ? dashData.profile.avatar : `https://ui-avatars.com/api/?name=${dashData.profile.name}&size=180&background=random`}`} />
               </a>
             </Link>
-            <button type="button" onClick={signOut}>
-              <FiPower
+
+            <button type="button" className="flex items-center justify-items-center focus:outline-none" onClick={signOut}>
+              Sair
+              <FiLogOut
                 size={26}
-                style={{ color: '#f0972c' }}
+                style={{ color: '#f0972c', marginLeft: '1rem' }}
               />
             </button>
           </section>
@@ -120,7 +128,21 @@ function Dashboard({ data }) {
           <h1 className="sr-only">Trabalhos</h1>
 
           <div className="cards">
-            {dashData?.jobs.map((job) => (
+            {dashData.jobs.length === 0 ? (
+              <div>
+                <div className="card progress flex items-center justify-items-center">
+                  <h1 className="text-xl 2xl:text-2xl text-center">
+                    No momento você não possui nenhum trabalho ativo.
+                  </h1>
+                </div>
+                <img
+                  src="/images/no-jobs.svg"
+                  alt="sem trabalho"
+                  className="flex items-center w-full md:h-64 xl:h-64 2xl:h-96"
+                  style={{ margin: '5rem auto' }}
+                />
+              </div>
+            ) : dashData?.jobs.map((job) => (
               <div className={`card ${job.status}`} key={job.id}>
                 <div className="id column">{job.id}</div>
                 <div className="name column">{job.name}</div>
@@ -132,7 +154,7 @@ function Dashboard({ data }) {
                 </div>
                 <div className="amount column">
                   <span>Valor</span>
-                  <p>R$ {job.budget.toFixed(2).replace('.', ',')}</p>
+                  <p>{job.budget.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || ''}</p>
                 </div>
                 <div className="status badge column">
                   <p>
@@ -147,8 +169,11 @@ function Dashboard({ data }) {
                     </a>
                   </Link>
                   <button
-                    onClick={() => { setModal(true) }}
-                    className="delete button white"
+                    onClick={() => {
+                      setModal(true)
+                      setJoob(job.id)
+                    }}
+                    className="delete button white focus:outline-none"
                     title="Excluir Job"
                   >
                     <img src="/images/trash-24.svg" alt="Excluir Job" />
@@ -159,30 +184,35 @@ function Dashboard({ data }) {
           </div>
         </main>
       </div>
-      {modal ? (
-        <div className="open-modal modal-wrapper">
-          <div className="modal">
+      {modal && (
+        <div className="modal-wrapper on">
+          <div className="modal animate-pop back">
             <img
-              src="/images/trash-48.svg"
+              src="images/trash-48.svg"
               alt="Excluir Job"
               title="Excluir Job"
+              className="m-auto"
             />
             <h3>Excluir Job</h3>
-            <p>
-              Quer mesmo excluir esse job? <br />
-              Ele será apagado para sempre.
+            <p>Quer mesmo excluir esse job? <br />
+                Ele será apagado para sempre.
             </p>
             <footer>
-              <a className="button gray" href="#">
-                Cancelar
-              </a>
-              <button className="button red" type="submit" form="delete-job">
+              <a className="button gray mr-4" onClick={() => setModal(!modal)}>Cancelar</a>
+              <button
+                className="button red focus:outline-none"
+                type="submit"
+                onClick={() => {
+                  deleteJob(joob)
+                  setModal(!modal)
+                }}
+              >
                 Excluir Job
               </button>
             </footer>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   )
 }

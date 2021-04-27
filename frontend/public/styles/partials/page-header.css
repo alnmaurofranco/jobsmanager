@@ -1,6 +1,5 @@
 .page-header {
   background: var(--color-primary);
-  width: 100vw;
   padding-top: 2rem;
   padding-bottom: 3rem;
 }
@@ -10,7 +9,7 @@
   margin-bottom: 4rem;
 }
 
-.page-header.inner .container{
+.page-header.inner .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }

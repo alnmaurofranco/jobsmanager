@@ -107,7 +107,7 @@ export default function Job() {
           <p>Preencha os dados ao lado para ver o valor do projeto</p>
           <div className="button-group">
             <button
-              className="button green"
+              className="button green mr-2"
               form="form-job"
               type="submit"
               title="Salvar Dados"
