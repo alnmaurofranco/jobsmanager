@@ -23,13 +23,13 @@ interface ISignupData {
 
 const Register: React.FC<{}> = () => {
   const formRef = useRef<FormHandles>(null)
-  const { signup } = useAuth()
-
-  const [passwordShown, setPasswordShown] = useState(false);
-
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(passwordShown ? false : true);
-  };
+  const {
+    signup,
+    togglePasswordVisiblity,
+    passwordShown,
+    confirmPasswordShown,
+    toggleConfirmPasswordVisiblity
+  } = useAuth()
 
   const handleRegister = useCallback(async (data: ISignupData) => {
     try {
@@ -165,12 +165,12 @@ const Register: React.FC<{}> = () => {
                   </div>
                   <div className="inline-flex items-center justify-center absolute right-0 top-0 h-10 w-14 text-gray-400">
                     {
-                      passwordShown === true ? <IoEyeOffOutline className="h-7 w-7" onClick={togglePasswordVisiblity} />
-                        : <IoEyeOutline className="h-7 w-7" onClick={togglePasswordVisiblity} />
+                      confirmPasswordShown === true ? <IoEyeOffOutline className="h-7 w-7" onClick={toggleConfirmPasswordVisiblity} />
+                        : <IoEyeOutline className="h-7 w-7" onClick={toggleConfirmPasswordVisiblity} />
                     }
                   </div>
                   <Input
-                    type={passwordShown === true ? "text" : "password"}
+                    type={confirmPasswordShown === true ? "text" : "password"}
                     name="confirmPassword"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     placeholder="Digite a senha novamente..."

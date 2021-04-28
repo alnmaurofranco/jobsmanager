@@ -22,8 +22,12 @@ interface ISignInFormData {
 
 const Login: React.FC<{}> = () => {
   const formRef = useRef<FormHandles>(null)
-  const [passwordShown, setPasswordShown] = useState(false);
-  const { showModal, signIn } = useAuth()
+  const {
+    showModal,
+    passwordShown,
+    togglePasswordVisiblity,
+    signIn
+  } = useAuth()
 
   const handleSubmit = useCallback(async (data: ISignInFormData) => {
     try {
@@ -49,10 +53,6 @@ const Login: React.FC<{}> = () => {
       formRef.current?.setErrors(errors)
     }
   }, [signIn])
-
-  const togglePasswordVisiblity = () => {
-    setPasswordShown(!passwordShown);
-  };
 
   return (
     <Layout title="Entrar">

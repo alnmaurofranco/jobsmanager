@@ -1,12 +1,13 @@
 import Head from "next/head";
 import Link from 'next/link'
 import Header from "../../../components/Dashboard/Header";
-import { api } from '../../../services/api';
 import { GetServerSideProps } from 'next';
 import Input from '../../../components/Input/index';
 import { Form } from '@unform/web';
+import { useAuth } from '../../../hooks/AuthContext';
 
 export default function ChangePassword() {
+  const { user } = useAuth()
   return (
     <div id="page-profile">
       <Head>

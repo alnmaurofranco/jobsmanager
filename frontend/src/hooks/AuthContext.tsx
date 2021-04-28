@@ -8,10 +8,21 @@ import { addMinutes } from 'date-fns';
 
 const MySwal = withReactContent(Swal)
 
+interface IProfile {
+  name: string;
+  avatar: string;
+  monthlyBudget: number;
+  daysPerWeek: number;
+  hoursPerDay: number;
+  vacationPerYear: number;
+  valueHour: number;
+}
+
 interface IUser {
   id: string;
   username: string;
   email: string;
+  profile: IProfile;
   createdAt: string;
 }
 
@@ -118,10 +129,26 @@ export const AuthProvider: React.FC = ({ children }) => {
         expires: addMinutes(new Date(), 15),
       });
 
-      localStorage.setItem('@JobsManager:user', JSON.stringify(user))
+      const userFormatted = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        profile: {
+          name: user.profile.name,
+          avatar: user.profile.avatar,
+          daysPerWeek: Number(user.profile.days_per_week),
+          hoursPerDay: Number(user.profile.hours_per_day),
+          monthlyBudget: Number(user.profile.monthly_budget),
+          vacationPerYear: Number(user.profile.vacation_per_year),
+          valueHour: Number(user.profile.value_hour)
+        },
+        createdAt: user.created_at
+      } as IUser
+
+      localStorage.setItem('@JobsManager:user', JSON.stringify(userFormatted))
 
       setAuthenticated(true)
-      setData({ token, user })
+      setData({ token, user: userFormatted })
       setShowModal(true)
 
       setTimeout(() => {
@@ -195,6 +222,26 @@ export const AuthProvider: React.FC = ({ children }) => {
           Authorization: `Bearer ${token}`
         }
       })
+
+      const user = response.data
+
+      const userFormatted = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        profile: {
+          name: user.profile.name,
+          avatar: user.profile.avatar,
+          daysPerWeek: Number(user.profile.days_per_week),
+          hoursPerDay: Number(user.profile.hours_per_day),
+          monthlyBudget: Number(user.profile.monthly_budget),
+          vacationPerYear: Number(user.profile.vacation_per_year),
+          valueHour: user.profile.value_hour
+        },
+        createdAt: user.created_at
+      } as IUser
+
+      localStorage.setItem('@JobsManager:user', JSON.stringify(userFormatted))
 
       MySwal.fire({
         title: 'Perfil atualizado',

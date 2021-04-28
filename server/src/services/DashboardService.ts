@@ -12,7 +12,7 @@ interface IResponse {
   jobs: Job[];
   statusCount: Object;
   freeHours: number;
-  profile: {};
+  //profile: {};
 }
 
 class DashboardService {
@@ -87,7 +87,7 @@ class DashboardService {
       jobs: updatedJobs,
       statusCount,
       freeHours,
-      profile: user.profile,
+      //profile: user.profile,
     };
   }
 }

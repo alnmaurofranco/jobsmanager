@@ -45,19 +45,11 @@ function Dashboard({ data }) {
   const [joob, setJoob] = useState(0)
   const dashData: IDashboardData = data
 
-  // const handleDeleteJob = useCallback(async (id: number) => {
-
-  // }, [deleteJob])
   return (
     <div id="page-index">
       <Head>
-        <title>JobsManager - Dashboard</title>
+        <title>Dashboard - JobsManager</title>
         <link rel="stylesheet" href="/styles/pages/index.css" />
-
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
       </Head>
 
       <header className="page-header">
@@ -77,9 +69,9 @@ function Dashboard({ data }) {
             <Link href="/dashboard/profile">
               <a id="avatar-profile">
                 <p>
-                  {dashData.profile.name} <span>Ver perfil</span>
+                  {user?.profile.name} <span>Ver perfil</span>
                 </p>
-                <img src={`${dashData.profile.avatar ? dashData.profile.avatar : `https://ui-avatars.com/api/?name=${dashData.profile.name}&size=180&background=random`}`} />
+                <img src={`${user?.profile.avatar ? user?.profile.avatar : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`}`} />
               </a>
             </Link>
 
