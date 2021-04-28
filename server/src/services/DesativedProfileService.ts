@@ -21,7 +21,8 @@ class DesativedProfileService {
       throw new HttpException(400, 'User not found in system.');
     }
 
-    user.email_verification = false;
+    user.active = false;
+    user.updated_at = new Date(Date.now());
 
     return await this.ormRepository.save(user);
   }

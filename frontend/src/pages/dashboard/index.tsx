@@ -39,7 +39,7 @@ interface IDashboardData {
 }
 
 function Dashboard({ data }) {
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
   const { deleteJob } = useConstant()
   const [modal, setModal] = useState(false)
   const [joob, setJoob] = useState(0)
@@ -188,7 +188,7 @@ function Dashboard({ data }) {
         <div className="modal-wrapper on">
           <div className="modal animate-pop back">
             <img
-              src="images/trash-48.svg"
+              src="/images/trash-48.svg"
               alt="Excluir Job"
               title="Excluir Job"
               className="m-auto"

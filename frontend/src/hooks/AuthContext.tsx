@@ -13,7 +13,6 @@ interface IUser {
   username: string;
   email: string;
   createdAt: string;
-  updatedAt: string;
 }
 
 interface IAuthState {
@@ -60,6 +59,7 @@ interface IAuthContextState {
   passwordShown: boolean;
   confirmPasswordShown: boolean;
   updateProfile: (data: IUserProfileData) => void;
+  desactiveProfile: () => void;
   user: IUser;
 }
 
@@ -214,6 +214,28 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }, [])
 
+  const desactiveProfile = useCallback(async () => {
+    try {
+      const token = Cookie.get('token')
+
+      await api.delete('profile/delete', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      Cookie.remove('token')
+      localStorage.removeItem('@JobsManager:user')
+      router.push('/login')
+    } catch (error) {
+      MySwal.fire({
+        title: 'Ops!',
+        text: error.data,
+        icon: "error",
+      })
+    }
+  }, [])
+
   return (
     <AuthContext.Provider value={{
       showModal,
@@ -228,6 +250,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       passwordShown,
       confirmPasswordShown,
       updateProfile,
+      desactiveProfile,
       user: data.user
     }}
     >

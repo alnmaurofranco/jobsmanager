@@ -5,7 +5,7 @@ import { api } from '../../../services/api';
 import { GetServerSideProps } from 'next';
 import Input from '../../../components/Input/index';
 import { Form } from '@unform/web';
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useAuth } from '../../../hooks/AuthContext';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -47,7 +47,8 @@ interface IUserProfileData {
 
 export default function Profile({ user }: IUserData) {
   const formRef = useRef<FormHandles>(null)
-  const { updateProfile } = useAuth()
+  const { updateProfile, desactiveProfile } = useAuth()
+  const [modal, setModal] = useState(false);
 
   const handleUpdateProfile = useCallback(async (data: IUserProfileData) => {
     try {
@@ -59,15 +60,18 @@ export default function Profile({ user }: IUserData) {
         email: Yup.string()
           .required('E-mail obrigatorio')
           .email('Digite um e-mail válido'),
-        // dailyHours: Yup.number()
-        //   .typeError('Você deve especificar um número')
-        //   .required('Horas por dia vai dedicar ao job é obrigatório'),
-        // monthlyBudget: Yup.number()
-        //   .typeError('Você deve especificar um número')
-        //   .required(''),
-        // hoursPerDay: Yup.number()
-        //   .typeError('Você deve especificar um número')
-        //   .required(''),
+        daysPerWeek: Yup.number()
+          .typeError('Você deve especificar um número')
+          .required('Quantos dias quero trabalhar por semana é obrigatório'),
+        monthlyBudget: Yup.number()
+          .typeError('Você deve especificar um número')
+          .required('Quanto eu quero ganhar é obrigatório'),
+        hoursPerDay: Yup.number()
+          .typeError('Você deve especificar um número')
+          .required('Quantas horas quero trabalhar por dia é obrigatório'),
+        vacationPerYear: Yup.number()
+          .typeError('Você deve especificar um número')
+          .required('Quantas semanas por ano você quer tirar férias é obrigatório'),
       })
 
       await schema.validate(data, {
@@ -132,7 +136,16 @@ export default function Profile({ user }: IUserData) {
         <main>
           <Form onSubmit={handleUpdateProfile} ref={formRef} id="form-profile">
             <fieldset>
-              <legend>Dados do perfil</legend>
+              <legend>
+                Dados do perfil
+                <a
+                  onClick={() => setModal(!modal)}
+                  className="button red focus:outline-none"
+                  style={{ marginLeft: '32.7rem' }}
+                >
+                  Excluir conta
+                </a>
+              </legend>
               <div className="separator light"></div>
 
               <div className="input-group">
@@ -245,6 +258,35 @@ export default function Profile({ user }: IUserData) {
           </Form>
         </main>
       </div>
+      {modal && (
+        <div className="modal-wrapper on">
+          <div className="modal animate-pop back">
+            <img
+              src="/images/trash-48.svg"
+              alt="Excluir Conta"
+              title="Excluir Conta"
+              className="m-auto"
+            />
+            <h3>Excluir Conta</h3>
+            <p>Quer mesmo excluir sua conta? <br />
+                Ela será apagada para sempre.
+            </p>
+            <footer>
+              <a className="button gray mr-4" onClick={() => setModal(!modal)}>Cancelar</a>
+              <button
+                className="button red focus:outline-none"
+                type="submit"
+                onClick={() => {
+                  desactiveProfile()
+                  setModal(!modal)
+                }}
+              >
+                Excluir Job
+              </button>
+            </footer>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

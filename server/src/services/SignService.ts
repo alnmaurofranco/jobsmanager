@@ -3,6 +3,7 @@ import HttpException from '@errors/httpException';
 import { getRepository, Repository } from 'typeorm';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '@utils/AuthSecurity';
+import { format } from 'date-fns';
 
 interface IRequest {
   email: string;
@@ -24,6 +25,7 @@ class SignService {
   public async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.ormRepository.findOne({
       where: { email },
+      relations: ['profile'],
     });
 
     if (!user) {
@@ -34,6 +36,14 @@ class SignService {
 
     if (!passMatched) {
       throw new HttpException(400, 'Incorrect email/password combination.');
+    }
+
+    if (user.active === false) {
+      const desactiveDate = format(user.updated_at, 'dd MMMM');
+      throw new HttpException(
+        400,
+        `This account was disabled on ${desactiveDate}`
+      );
     }
 
     const token = generateToken(user.id);

@@ -29,6 +29,7 @@ class User {
   @Column('varchar')
   password: string;
 
+  @Exclude()
   @Column('boolean')
   email_verification: boolean;
 
@@ -38,9 +39,14 @@ class User {
   @OneToOne(() => UserProfile, (up) => up.user)
   profile: UserProfile;
 
+  @Exclude()
+  @Column('boolean')
+  active: boolean;
+
   @CreateDateColumn({ type: 'time with time zone' })
   created_at: Date;
 
+  @Exclude()
   @UpdateDateColumn({ type: 'time with time zone' })
   updated_at: Date;
 

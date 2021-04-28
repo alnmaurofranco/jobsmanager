@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import User from './User';
+import { Exclude } from 'class-transformer';
 
 @Entity('users_profile')
 class UserProfile {
@@ -25,6 +26,7 @@ class UserProfile {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
+  @Exclude()
   @Column('uuid')
   user_id: string;
 
@@ -43,9 +45,11 @@ class UserProfile {
   @Column('decimal')
   value_hour: number;
 
+  @Exclude()
   @CreateDateColumn({ type: 'time with time zone' })
   created_at: Date;
 
+  @Exclude()
   @UpdateDateColumn({ type: 'time with time zone' })
   updated_at: Date;
 
