@@ -40,11 +40,12 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
       router.push('/dashboard')
     } catch (error) {
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.response.data,
-        icon: "info",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "info",
+        }) : router.push('500')
     }
   }, [])
 
@@ -70,11 +71,12 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
       router.push('/dashboard')
     } catch (error) {
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.response.data,
-        icon: "error",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
     }
   }, [])
 
@@ -89,11 +91,12 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
       router.push('/dashboard');
     } catch (error) {
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.response.data,
-        icon: "error",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
     }
   }, [])
 

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { createContext, useCallback, useState, useContext } from "react";
+import { createContext, useCallback, useState, useContext, useEffect } from 'react';
 import { api } from "../services/api";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -109,11 +109,12 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       router.push('/login')
     } catch (error) {
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.response.data,
-        icon: "info",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "info",
+        }) : router.push('500')
     }
   }, [])
 
@@ -158,17 +159,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     } catch (error) {
       setShowModal(false)
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.response.data,
-        icon: "warning",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
       //return Promise.reject(error.response.data);
     }
   }, [])
 
   const signOut = useCallback(() => {
-    //localStorage.removeItem('@JobsManager:token')
     Cookie.remove('token')
     localStorage.removeItem('@JobsManager:user')
 
@@ -180,11 +181,12 @@ export const AuthProvider: React.FC = ({ children }) => {
     try {
       //const response = await api.post('/');
     } catch (error) {
-      MySwal.fire({
-        title: '❌ Ops!',
-        text: error.response.data,
-        icon: "error",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
     }
   }, [])
 
@@ -192,11 +194,12 @@ export const AuthProvider: React.FC = ({ children }) => {
     try {
 
     } catch (error) {
-      MySwal.fire({
-        title: '❌ Ops!',
-        text: error.response.data,
-        icon: "error",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
     }
   }, [])
 
@@ -253,11 +256,12 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       router.push('/dashboard/profile')
     } catch (error) {
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.response.data,
-        icon: "error",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
     }
   }, [])
 
@@ -275,11 +279,12 @@ export const AuthProvider: React.FC = ({ children }) => {
       localStorage.removeItem('@JobsManager:user')
       router.push('/login')
     } catch (error) {
-      MySwal.fire({
-        title: 'Ops!',
-        text: error.data,
-        icon: "error",
-      })
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
     }
   }, [])
 

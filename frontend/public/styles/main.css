@@ -110,3 +110,10 @@ a {
 .flex {
   display: flex;
 }
+
+.profile-avatar {
+  width: 4rem !important; /* 64px of 16px root*/
+  height: 4rem !important; /* 64px of 16px root*/
+  border-radius: 50% !important;
+  border: 0.156rem solid #f1972c !important;
+}

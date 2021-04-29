@@ -1,10 +1,17 @@
 import './env';
-
 import auth from './auth';
+import cors from './cors';
 
 const { NODE_PORT, NODE_URL } = process.env;
 
-const port = NODE_PORT;
-const baseUrl = NODE_URL;
+interface IServer {
+  port: number;
+  baseURL: string;
+}
 
-export { port, baseUrl, auth };
+const server = {
+  port: parseInt(NODE_PORT as string, 10) || 4000,
+  baseURL: NODE_URL,
+} as IServer;
+
+export { server, auth, cors };

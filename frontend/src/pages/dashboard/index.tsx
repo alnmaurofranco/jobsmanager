@@ -1,11 +1,12 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { api } from '../../services/api'
 import { FiLogOut } from 'react-icons/fi'
 import { useAuth } from '../../hooks/AuthContext';
 import { useConstant } from '../../hooks/ConstantContext';
+import Image from 'next/image';
 
 interface IJobs {
   id: number;
@@ -38,7 +39,7 @@ interface IDashboardData {
   profile: IProfile
 }
 
-function Dashboard({ data }) {
+export default function Dashboard({ data }) {
   const { signOut, user } = useAuth()
   const { deleteJob } = useConstant()
   const [modal, setModal] = useState(false)
@@ -71,7 +72,16 @@ function Dashboard({ data }) {
                 <p>
                   {user?.profile.name} <span>Ver perfil</span>
                 </p>
-                <img src={`${user?.profile.avatar ? user?.profile.avatar : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`}`} />
+                <Image
+                  width={180}
+                  height={180}
+                  src={`${user?.profile.avatar
+                    ? user?.profile.avatar
+                    : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`}`}
+                  alt={user?.profile.name}
+                  className="profile-avatar"
+                  objectFit="cover"
+                />
               </a>
             </Link>
 
@@ -209,11 +219,17 @@ function Dashboard({ data }) {
   )
 }
 
-export default Dashboard
-
-
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { token } = req.cookies
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      }
+    }
+  }
 
   try {
     const res = await api.get('/dashboard', {

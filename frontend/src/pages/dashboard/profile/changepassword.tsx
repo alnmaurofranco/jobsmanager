@@ -5,6 +5,7 @@ import { GetServerSideProps } from 'next';
 import Input from '../../../components/Input/index';
 import { Form } from '@unform/web';
 import { useAuth } from '../../../hooks/AuthContext';
+import Image from 'next/image';
 
 export default function ChangePassword() {
   const { user } = useAuth()
@@ -24,9 +25,15 @@ export default function ChangePassword() {
 
       <div className="container animate-up delay-2">
         <aside className="card">
-          <img
-            src={`${user.profile.avatar ? user.profile.avatar : `https://ui-avatars.com/api/?name=${user.profile.name}&size=180&background=random`}`}
-            alt=""
+          <Image
+            width={180}
+            height={180}
+            src={`${user.profile.avatar
+              ? user.profile.avatar
+              : `https://ui-avatars.com/api/?name=${user.profile.name}&size=180&background=random`}`}
+            alt={user.profile.name}
+            className="profile-avatar"
+            objectFit="cover"
           />
           <h2 style={{ marginBottom: '2.758rem', marginTop: '2rem' }}>
 

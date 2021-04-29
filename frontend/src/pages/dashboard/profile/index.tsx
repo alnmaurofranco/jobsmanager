@@ -10,6 +10,7 @@ import { useAuth } from '../../../hooks/AuthContext';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErrors';
+import Image from 'next/image';
 
 interface IUserProfile {
   id: string;
@@ -110,9 +111,15 @@ export default function Profile({ user }: IUserData) {
 
       <div className="container animate-up delay-2">
         <aside className="card">
-          <img
-            src={`${user.profile.avatar ? user.profile.avatar : `https://ui-avatars.com/api/?name=${user.profile.name}&size=180&background=random`}`}
+          <Image
+            width={180}
+            height={180}
+            src={`${user.profile.avatar
+              ? user.profile.avatar
+              : `https://ui-avatars.com/api/?name=${user.profile.name}&size=180&background=random`}`}
             alt={user.profile.name}
+            className="profile-avatar"
+            objectFit="cover"
           />
           <h2 style={{ marginBottom: '2.758rem', marginTop: '2rem' }}>
             {user.profile.name}

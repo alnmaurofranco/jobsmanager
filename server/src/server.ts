@@ -5,9 +5,10 @@ import path from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
-import { errorHandler } from './errors/errorMiddleware';
-import { notFoundHandler } from './errors/notFound';
-import routes from './routes/routes';
+
+import { cors as corsConfig } from '@config/index';
+import { errorHandler } from '@errors/errorMiddleware';
+import { notFoundHandler } from '@errors/notFound';
 import routesapi from './routes';
 
 const server = express();
@@ -22,11 +23,7 @@ server.use(express.static('public'));
 server.set('views', path.join(__dirname, 'views'));
 
 // Middlewares
-server.use(
-  cors({
-    origin: '*',
-  })
-);
+server.use(cors(corsConfig.optionsCors));
 
 if (process.env.NODE_ENV === 'production') {
   server.use(morgan('tiny'));
@@ -36,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Rotas
-server.use(routes);
+server.get('/', (_req, res) => res.render('index'));
 
 server.use('/api', routesapi);
 
