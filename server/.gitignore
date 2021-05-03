@@ -117,3 +117,5 @@ dist
 
 .env.development
 .env.production
+
+middlewares/apiKey.ts

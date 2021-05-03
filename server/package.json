@@ -17,6 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/redis": "^2.8.28",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
     "cookie-parser": "^1.4.5",
@@ -31,6 +32,8 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
+    "rate-limiter-flexible": "^2.2.1",
+    "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.32",
     "uuid": "^8.3.2"

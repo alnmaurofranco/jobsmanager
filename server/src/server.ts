@@ -9,6 +9,7 @@ import cors from 'cors';
 import { cors as corsConfig } from '@config/index';
 import { errorHandler } from '@errors/errorMiddleware';
 import { notFoundHandler } from '@errors/notFound';
+import rateLimiter from '@middlewares/rateLimiter';
 import routesapi from './routes';
 
 const server = express();
@@ -23,6 +24,7 @@ server.use(express.static('public'));
 server.set('views', path.join(__dirname, 'views'));
 
 // Middlewares
+server.use(rateLimiter);
 server.use(cors(corsConfig.optionsCors));
 
 if (process.env.NODE_ENV === 'production') {

@@ -11,9 +11,8 @@ Ultima atualização em: **03.05.2021**
 - [] ACCEPT AUTHENTICATED WITH EMAIL VERIFIED 'feature/email-verified'
   - [] ONLY VERIFIED E-MAIL EQUALS TRUE
 - [] CHANGE PASSWORD ACCOUNT 'feature/change-password'
-- [] API SECURITY 'feature/security-api'
-  - [] Rate Limiting
-  - [] Express Bruce Force
+- [x] API SECURITY 'feature/security-api'
+  - [x] Rate Limiting
 - [x] DELETE PROFILE
 - [x] API CACHE 'feature/cachedb'
   - [x] USERS /users
