@@ -11,8 +11,8 @@
   --color-text: #fcfdff;
 
   --color-primary: #41414c;
-  --color-secondary: #f1972c;
-  --color-secondary-hover: #fa9c2d;
+  --color-secondary: #064e3b;
+  --color-secondary-hover: #064e3b;
 
   --color-input-background: #f8f8fc;
   --color-button-text: #ffffff;
@@ -21,7 +21,7 @@
 
   --color-card-background: var(--color-text);
   --color-card-title: #5a5a66;
-  --color-card-label: #bfbfcc;
+  --color-card-label: #fff;
   --color-card-content: #787880;
 
   --color-cancel: #e1e3e5;
@@ -99,7 +99,8 @@ a {
 
 .separator {
   height: 1px;
-  background-color: var(--color-hairline-in-dark);
+  /* background-color: var(--color-hairline-in-dark); */
+  background-color: #064e3b;
   margin: 1rem 0;
 }
 
@@ -115,5 +116,6 @@ a {
   width: 4rem !important; /* 64px of 16px root*/
   height: 4rem !important; /* 64px of 16px root*/
   border-radius: 50% !important;
-  border: 0.156rem solid #f1972c !important;
+  /* border: 0.156rem solid #f1972c !important; */
+  border: 0.156rem solid #064e3b !important;
 }

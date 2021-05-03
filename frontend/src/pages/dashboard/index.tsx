@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { api } from '../../services/api'
 import { FiLogOut } from 'react-icons/fi'
 import { useAuth } from '../../hooks/AuthContext';
@@ -53,7 +53,7 @@ export default function Dashboard({ data }) {
         <link rel="stylesheet" href="/styles/pages/index.css" />
       </Head>
 
-      <header className="page-header">
+      <header className="page-header bg-green-700">
         <div className="container">
           <section id="top" className="animate-up">
             <h2 className="sr-only">Homepage</h2>
@@ -89,7 +89,8 @@ export default function Dashboard({ data }) {
               Sair
               <FiLogOut
                 size={26}
-                style={{ color: '#f0972c', marginLeft: '1rem' }}
+                className="text-green-900"
+                style={{ marginLeft: '1rem' }}
               />
             </button>
           </section>
@@ -114,7 +115,7 @@ export default function Dashboard({ data }) {
                 </div>
             </div>
             <Link href="/dashboard/job">
-              <a className="button orange">
+              <a className="button bg-green-800 hover:bg-green-900">
                 <span>
                   <img src="/images/plus-24.svg" alt="Novo Job" />
                 </span>

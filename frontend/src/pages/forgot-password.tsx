@@ -73,7 +73,7 @@ const ForgotPassword: React.FC<{}> = () => {
                   <Input
                     type="email"
                     name="email"
-                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-4 focus:outline-none focus:border-blue-400"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-4 focus-within:outline-none focus-within:border-green-500"
                     placeholder="E-mail"
                   />
                 </div>

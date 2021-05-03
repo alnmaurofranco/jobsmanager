@@ -1,16 +1,12 @@
-import { getRepository, Repository } from 'typeorm';
-import User from '@database/entities/User';
+import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
+import { getCustomRepository } from 'typeorm';
 
 class FindAllUsersService {
-  private ormRepository: Repository<User>;
-
-  constructor() {
-    this.ormRepository = getRepository(User);
-  }
+  private usersRepository = getCustomRepository(UserRepository);
 
   public async execute() {
-    const users = await this.ormRepository.find({
+    const users = await this.usersRepository.find({
       relations: ['jobs', 'profile'],
     });
 

@@ -1,8 +1,9 @@
 import Job from '@database/entities/Job';
-import User from '@database/entities/User';
+import { JobRepository } from '@database/repositories/JobRepository';
+import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import { calculateBudget, remainingDays } from '@utils/JobUtils';
-import { getRepository, Repository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 
 interface IRequest {
   user_id: string;
@@ -16,27 +17,17 @@ interface IResponse {
 }
 
 class DashboardService {
-  private ormRepository: Repository<Job>;
-  private ormUsersRepository: Repository<User>;
-
-  constructor() {
-    this.ormRepository = getRepository(Job);
-    this.ormUsersRepository = getRepository(User);
-  }
+  private jobsRepository = getCustomRepository(JobRepository);
+  private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({ user_id }: IRequest): Promise<IResponse> {
-    const user = await this.ormUsersRepository.findOne({
-      where: {
-        id: user_id,
-      },
-      relations: ['profile'],
-    });
+    const user = await this.usersRepository.findByRelations(user_id);
 
     if (!user) {
       throw new HttpException(404, 'user not found!');
     }
 
-    const jobs = await this.ormRepository.find({
+    const jobs = await this.jobsRepository.find({
       where: {
         user_id: user.id,
       },

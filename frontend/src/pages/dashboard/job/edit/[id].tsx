@@ -19,6 +19,7 @@ interface IJob {
   dailyHours: number;
   totalHours: number;
   userId?: string;
+  budget: number;
   createdAt?: string;
 }
 
@@ -82,6 +83,7 @@ export default function EditJob({ job }: IJobData) {
                   type="text"
                   id="name"
                   name="name"
+                  className="focus:outline-none focus:border-green-500"
                   defaultValue={job.name}
                 />
               </div>
@@ -96,6 +98,7 @@ export default function EditJob({ job }: IJobData) {
                     type="number"
                     id="dailyHours"
                     name="dailyHours"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={job.dailyHours}
                   />
                 </div>
@@ -109,6 +112,7 @@ export default function EditJob({ job }: IJobData) {
                     type="number"
                     id="totalHours"
                     name="totalHours"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={job.totalHours}
                   />
                 </div>
@@ -118,8 +122,8 @@ export default function EditJob({ job }: IJobData) {
         </main>
 
         <aside className="card">
-          <img src="/images/money-gray.svg" alt="Imagem de Dinheiro" />
-          <p>Preencha os dados ao lado para ver o valor do projeto</p>
+          <img src="/images/money-color.svg" alt="Imagem de Dinheiro" />
+          <p>O valor do projeto ficou em <strong>{job.budget.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || ''}</strong></p>
           <div className="button-group">
             <button
               className="button green mr-2 focus:outline-none"
@@ -169,12 +173,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
     const data = response.data;
 
     const job = {
-      id: data.id,
-      name: data.name,
-      dailyHours: Number(data.daily_hours),
-      totalHours: Number(data.total_hours),
-      userId: data.user_id,
-      createdAt: data.created_at
+      id: data.job.id,
+      name: data.job.name,
+      dailyHours: Number(data.job.daily_hours),
+      totalHours: Number(data.job.total_hours),
+      userId: data.job.user_id,
+      budget: data.budget,
+      createdAt: data.job.created_at
     }
 
     return {

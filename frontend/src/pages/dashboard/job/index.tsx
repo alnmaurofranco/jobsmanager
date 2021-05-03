@@ -71,6 +71,7 @@ export default function Job() {
                   type="text"
                   id="name"
                   name="name"
+                  className="focus:outline-none focus:border-green-500"
                 />
               </div>
 
@@ -84,6 +85,7 @@ export default function Job() {
                     type="number"
                     id="dailyHours"
                     name="dailyHours"
+                    className="focus:outline-none focus:border-green-500"
                   />
                 </div>
 
@@ -96,6 +98,7 @@ export default function Job() {
                     type="number"
                     id="totalHours"
                     name="totalHours"
+                    className="focus:outline-none focus:border-green-500"
                   />
                 </div>
               </div>
@@ -107,7 +110,7 @@ export default function Job() {
           <p>Preencha os dados ao lado para ver o valor do projeto</p>
           <div className="button-group">
             <button
-              className="button green mr-2"
+              className="button green mr-2 focus:outline-none"
               form="form-job"
               type="submit"
               title="Salvar Dados"

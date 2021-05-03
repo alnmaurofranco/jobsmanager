@@ -162,6 +162,7 @@ export default function Profile({ user }: IUserData) {
                     type="text"
                     id="name"
                     name="name"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.profile.name || ''}
                   />
                 </div>
@@ -173,6 +174,7 @@ export default function Profile({ user }: IUserData) {
                     type="url"
                     id="avatar"
                     name="avatar"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.profile.avatar || ''}
                   />
                 </div>
@@ -184,6 +186,7 @@ export default function Profile({ user }: IUserData) {
                     type="text"
                     id="username"
                     name="username"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.username || ''}
                   />
                 </div>
@@ -195,6 +198,7 @@ export default function Profile({ user }: IUserData) {
                     type="email"
                     id="email"
                     name="email"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.email || ''}
                   />
                 </div>
@@ -216,6 +220,7 @@ export default function Profile({ user }: IUserData) {
                     placeholder="R$"
                     id="monthlyBudget"
                     name="monthlyBudget"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.profile.monthlyBudget || ''}
                   />
                 </div>
@@ -229,6 +234,7 @@ export default function Profile({ user }: IUserData) {
                     type="number"
                     id="hoursPerDay"
                     name="hoursPerDay"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.profile.hoursPerDay || ''}
                   />
                 </div>
@@ -244,6 +250,7 @@ export default function Profile({ user }: IUserData) {
                     type="number"
                     id="daysPerWeek"
                     name="daysPerWeek"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.profile.daysPerWeek || ''}
                   />
                 </div>
@@ -257,6 +264,7 @@ export default function Profile({ user }: IUserData) {
                     type="number"
                     id="vacationPerYear"
                     name="vacationPerYear"
+                    className="focus:outline-none focus:border-green-500"
                     defaultValue={user.profile.vacationPerYear || ''}
                   />
                 </div>

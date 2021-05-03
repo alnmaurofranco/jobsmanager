@@ -1,8 +1,9 @@
 import User from '@database/entities/User';
+import { UserProfileRepository } from '@database/repositories/UserProfileRepository';
+import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
-import { getRepository, Repository } from 'typeorm';
 import bcrypt from 'bcryptjs';
-import UserProfile from '@database/entities/UserProfile';
+import { getCustomRepository } from 'typeorm';
 
 interface IRequest {
   name: string;
@@ -13,13 +14,8 @@ interface IRequest {
 }
 
 class SignupService {
-  private ormRepository: Repository<User>;
-  private ormUserProfilesRepository: Repository<UserProfile>;
-
-  constructor() {
-    this.ormRepository = getRepository(User);
-    this.ormUserProfilesRepository = getRepository(UserProfile);
-  }
+  private usersRepository = getCustomRepository(UserRepository);
+  private userProfilesRepository = getCustomRepository(UserProfileRepository);
 
   public async execute({
     name,
@@ -28,9 +24,7 @@ class SignupService {
     username,
     confirm_password,
   }: IRequest): Promise<User> {
-    const userAlready = await this.ormRepository.findOne({
-      where: { email },
-    });
+    const userAlready = await this.usersRepository.findByEmail(email);
 
     if (userAlready) {
       throw new HttpException(400, 'E-mail address already used');
@@ -42,20 +36,20 @@ class SignupService {
 
     const hashedPass = bcrypt.hashSync(password, 8);
 
-    const user = this.ormRepository.create({
+    const user = this.usersRepository.create({
       email,
       username,
       password: hashedPass,
     });
 
-    await this.ormRepository.save(user);
+    await this.usersRepository.save(user);
 
-    const profile = this.ormUserProfilesRepository.create({
+    const profile = this.userProfilesRepository.create({
       user_id: user.id,
       name,
     });
 
-    await this.ormUserProfilesRepository.save(profile);
+    await this.userProfilesRepository.save(profile);
 
     return user;
   }

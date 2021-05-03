@@ -1,8 +1,8 @@
 import User from '@database/entities/User';
 import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
-import { getCustomRepository } from 'typeorm';
 import bcrypt from 'bcryptjs';
+import { getCustomRepository } from 'typeorm';
 
 interface IRequest {
   username: string;
@@ -12,11 +12,7 @@ interface IRequest {
 }
 
 class CreateUserService {
-  private ormRepository = getCustomRepository(UserRepository);
-
-  constructor() {
-    this.ormRepository;
-  }
+  private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({
     username,
@@ -24,7 +20,7 @@ class CreateUserService {
     password,
     confirm_password,
   }: IRequest): Promise<User> {
-    const userAlready = await this.ormRepository.findOne({
+    const userAlready = await this.usersRepository.findOne({
       where: { email },
     });
 
@@ -38,13 +34,13 @@ class CreateUserService {
 
     const hashedPass = bcrypt.hashSync(password, 8);
 
-    const user = this.ormRepository.create({
+    const user = this.usersRepository.create({
       email,
       username,
       password: hashedPass,
     });
 
-    await this.ormRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }

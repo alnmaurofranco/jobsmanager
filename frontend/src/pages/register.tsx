@@ -104,7 +104,7 @@ const Register: React.FC<{}> = () => {
                   <Input
                     type="text"
                     name="name"
-                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-60 py-2 focus:outline-none focus:border-blue-400"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-60 py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="Nome"
                   />
                 </div>
@@ -117,7 +117,7 @@ const Register: React.FC<{}> = () => {
                   <Input
                     type="text"
                     name="username"
-                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-60 py-2 focus:outline-none focus:border-blue-400"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-60 py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="Nome de usuário"
                   />
                 </div>
@@ -132,7 +132,7 @@ const Register: React.FC<{}> = () => {
                   <Input
                     type="email"
                     name="email"
-                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="E-mail"
                   />
                 </div>
@@ -152,7 +152,7 @@ const Register: React.FC<{}> = () => {
                   <Input
                     type={passwordShown === true ? "text" : "password"}
                     name="password"
-                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="Senha"
                   />
                 </div>
@@ -172,7 +172,7 @@ const Register: React.FC<{}> = () => {
                   <Input
                     type={confirmPasswordShown === true ? "text" : "password"}
                     name="confirmPassword"
-                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="Digite a senha novamente..."
                   />
                 </div>

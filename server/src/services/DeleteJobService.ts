@@ -11,10 +11,6 @@ interface IRequest {
 class DeleteJobService {
   private ormRepository = getCustomRepository(JobRepository);
 
-  constructor() {
-    this.ormRepository;
-  }
-
   public async execute({ id, user_id }: IRequest): Promise<any> {
     const job = await this.ormRepository.findById(id, user_id);
 

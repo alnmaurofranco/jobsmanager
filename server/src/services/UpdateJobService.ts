@@ -1,7 +1,7 @@
-import { getCustomRepository, getRepository, Repository } from 'typeorm';
 import Job from '@database/entities/Job';
 import { JobRepository } from '@database/repositories/JobRepository';
 import HttpException from '@errors/httpException';
+import { getCustomRepository } from 'typeorm';
 
 interface IRequest {
   id: number;
@@ -12,11 +12,7 @@ interface IRequest {
 }
 
 class UpdateJobService {
-  private ormRepository = getCustomRepository(JobRepository);
-
-  constructor() {
-    this.ormRepository;
-  }
+  private jobsRepository = getCustomRepository(JobRepository);
 
   public async execute({
     id,
@@ -25,13 +21,13 @@ class UpdateJobService {
     daily_hours,
     total_hours,
   }: IRequest): Promise<Job> {
-    const job = await this.ormRepository.findById(id, user_id);
+    const job = await this.jobsRepository.findById(id, user_id);
 
     if (!job) {
       throw new HttpException(400, 'not possible found job!');
     }
 
-    const findName = await this.ormRepository.findByName(name);
+    const findName = await this.jobsRepository.findByName(name);
 
     if (findName && findName.id !== id) {
       throw new HttpException(
@@ -44,7 +40,7 @@ class UpdateJobService {
     job.daily_hours = daily_hours;
     job.total_hours = total_hours;
 
-    await this.ormRepository.save(job);
+    await this.jobsRepository.save(job);
 
     return job;
   }

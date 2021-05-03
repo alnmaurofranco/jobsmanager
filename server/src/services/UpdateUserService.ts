@@ -13,11 +13,7 @@ interface IRequest {
 }
 
 class UpdateUserService {
-  private ormRepository = getCustomRepository(UserRepository);
-
-  constructor() {
-    this.ormRepository;
-  }
+  private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({
     id,
@@ -26,15 +22,13 @@ class UpdateUserService {
     old_password,
     password,
   }: IRequest): Promise<User> {
-    const user = await this.ormRepository.findById(id);
+    const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new HttpException(400, 'not found user with id');
     }
 
-    const userAlready = await this.ormRepository.findOne({
-      where: { email },
-    });
+    const userAlready = await this.usersRepository.findByEmail(email);
 
     if (userAlready) {
       throw new HttpException(400, 'E-mail address already used');
@@ -53,7 +47,7 @@ class UpdateUserService {
       user.password = await bcrypt.hash(password, 8);
     }
 
-    return await this.ormRepository.save(user);
+    return await this.usersRepository.save(user);
   }
 }
 

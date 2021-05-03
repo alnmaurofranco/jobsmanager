@@ -1,20 +1,30 @@
 ## JobsManager
 
-Ultima atualização em: **28.04.2021**
+Ultima atualização em: **03.05.2021**
 
 ## **FEATURES WEB/API**
 
-- [] PAGE FORGOT PASSWORD
+- [] Minified CSS
+- [] PAGE FORGOT PASSWORD 'feature/page-forgotpassword'
   - [] SEND EMAIL
   - [] RECIVE TOKEN
-- [] ACCEPT AUTHENTICATED WITH EMAIL VERIFIED
+- [] ACCEPT AUTHENTICATED WITH EMAIL VERIFIED 'feature/email-verified'
   - [] ONLY VERIFIED E-MAIL EQUALS TRUE
-- [] CHANGE PASSWORD ACCOUNT
+- [] CHANGE PASSWORD ACCOUNT 'feature/change-password'
+- [] API SECURITY 'feature/security-api'
+  - [] Rate Limiting
+  - [] Express Bruce Force
 - [x] DELETE PROFILE
 - [] DEPLOY VERCEL FRONT-END
 - [] DEPLOY HEROKU BACK-END
 
 ## WEB
+
+- [] feature/change-stylesweb
+
+  - [x] LOGOTIPO 'JOBSMANAGER'
+  - [x] FAVICON
+  - [x] MUDAR AS CORES DO LAYOUT
 
 - [x] PAGE LOGIN
 - [x] USER WITH AUTHENTICATION PERFORM NOT ACCESS /login
@@ -29,7 +39,7 @@ Ultima atualização em: **28.04.2021**
 - [x] REVISÃO DO MODAL DASHBOARD
 - [x] REVISÃO DO MODAL NO LOGIN
 - [x] REVISÃO DO DASHBOARD HEADER
-- [] REVISÃO DO USER EM USEAUTH()
+- [x] REVISÃO DO USER EM USEAUTH()
 
 ## API
 

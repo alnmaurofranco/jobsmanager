@@ -59,26 +59,33 @@ export default function ChangePassword() {
 
               <div className="input-wrapper mb-6">
                 <label htmlFor="name">Senha atual</label>
-                <Input type="text" id="name" name="name" />
+                <Input
+                  type="text"
+                  id="old_password"
+                  name="old_password"
+                  className="focus:outline-none focus:border-green-500"
+                />
               </div>
 
               <div className="input-wrapper mb-6">
                 <label htmlFor="avatar">Nova senha</label>
                 <Input
-                  placeholder="https://"
-                  type="url"
-                  id="avatar"
-                  name="avatar"
+                  placeholder=""
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="focus:outline-none focus:border-green-500"
                 />
               </div>
 
               <div className="input-wrapper">
                 <label htmlFor="avatar">Confirme nova senha</label>
                 <Input
-                  placeholder="https://"
-                  type="url"
-                  id="avatar"
-                  name="avatar"
+                  placeholder=""
+                  type="password"
+                  id="confirmpassword"
+                  name="confirmpassword"
+                  className="focus:outline-none focus:border-green-500"
                 />
               </div>
             </fieldset>

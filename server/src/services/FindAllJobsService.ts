@@ -1,20 +1,17 @@
-import { getRepository, Repository } from 'typeorm';
 import Job from '@database/entities/Job';
+import { JobRepository } from '@database/repositories/JobRepository';
 import HttpException from '@errors/httpException';
+import { getCustomRepository } from 'typeorm';
 
 interface IRequest {
   user_id: string;
 }
 
 class FindAllJobsService {
-  private ormRepository: Repository<Job>;
-
-  constructor() {
-    this.ormRepository = getRepository(Job);
-  }
+  private jobsRepository = getCustomRepository(JobRepository);
 
   public async execute({ user_id }: IRequest): Promise<Job[]> {
-    const jobs = await this.ormRepository.find({
+    const jobs = await this.jobsRepository.find({
       where: {
         user_id,
       },

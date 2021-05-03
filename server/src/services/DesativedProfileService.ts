@@ -10,10 +10,6 @@ interface IRequest {
 class DesativedProfileService {
   private ormRepository = getCustomRepository(UserRepository);
 
-  constructor() {
-    this.ormRepository;
-  }
-
   public async execute({ user_id }: IRequest): Promise<User> {
     const user = await this.ormRepository.findUserById(user_id);
 

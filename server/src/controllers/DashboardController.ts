@@ -1,7 +1,5 @@
-import { Request, Response } from 'express';
-import FindAllJobsService from '@services/FindAllJobsService';
-import { calculateBudget, remainingDays } from '../utils/JobUtils';
 import DashboardService from '@services/DashboardService';
+import { Request, Response } from 'express';
 
 class DashboardController {
   public async index(req: Request, res: Response) {

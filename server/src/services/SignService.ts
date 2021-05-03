@@ -1,9 +1,10 @@
 import User from '@database/entities/User';
+import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
-import { getRepository, Repository } from 'typeorm';
-import bcrypt from 'bcryptjs';
 import { generateToken } from '@utils/AuthSecurity';
+import bcrypt from 'bcryptjs';
 import { format } from 'date-fns';
+import { getCustomRepository } from 'typeorm';
 
 interface IRequest {
   email: string;
@@ -16,14 +17,10 @@ interface IResponse {
 }
 
 class SignService {
-  private ormRepository: Repository<User>;
-
-  constructor() {
-    this.ormRepository = getRepository(User);
-  }
+  private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.ormRepository.findOne({
+    const user = await this.usersRepository.findOne({
       where: { email },
       relations: ['profile'],
     });

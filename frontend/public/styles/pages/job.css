@@ -9,10 +9,11 @@ aside.card {
 }
 
 aside > img {
-  margin-bottom: 1.5rem;
+  margin: auto;
 }
 
 aside p {
+  margin-top: 1.75rem;
   margin-bottom: 1.75rem;
 
   font-family: Inter;

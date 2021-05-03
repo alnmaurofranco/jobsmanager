@@ -10,10 +10,6 @@ interface IRequest {
 class DeleteUserService {
   private ormRepository = getCustomRepository(UserRepository);
 
-  constructor() {
-    this.ormRepository;
-  }
-
   public async execute({ id }: IRequest): Promise<User> {
     const user = await this.ormRepository.findById(id);
 

@@ -8,14 +8,10 @@ interface IRequest {
 }
 
 class ShowUserService {
-  private ormRepository = getCustomRepository(UserRepository);
-
-  constructor() {
-    this.ormRepository;
-  }
+  private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({ id }: IRequest): Promise<User> {
-    const user = await this.ormRepository.findById(id);
+    const user = await this.usersRepository.findById(id);
 
     if (!user) {
       throw new HttpException(400, 'not found user with id');
