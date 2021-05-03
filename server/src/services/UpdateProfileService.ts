@@ -5,6 +5,7 @@ import HttpException from '@errors/httpException';
 import { calculateValueHour } from '@utils/JobUtils';
 import { compare, hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
+import RedisCache from '../implementations/RedisCache';
 
 interface IRequest {
   user_id: string;
@@ -23,6 +24,7 @@ interface IRequest {
 class UpdateProfileService {
   private usersRepository = getCustomRepository(UserRepository);
   private userProfileRepository = getCustomRepository(UserProfileRepository);
+  private cacheProvider = new RedisCache();
 
   public async execute({
     user_id,
@@ -94,6 +96,7 @@ class UpdateProfileService {
     userProfile.value_hour = valueHour;
 
     await this.userProfileRepository.save(userProfile);
+    await this.cacheProvider.invalidate(`show-profile:${user_id}`);
 
     return {
       ...user,
