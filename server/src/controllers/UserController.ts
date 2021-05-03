@@ -8,9 +8,10 @@ import DeleteUserService from '@services/DeleteUserService';
 
 class UserController {
   public async index(req: Request, res: Response) {
+    const { id: user_id } = req.user;
     const usersService = new FindAllUsersService();
 
-    const users = await usersService.execute();
+    const users = await usersService.execute(user_id);
 
     return res.json(classToClass(users));
   }

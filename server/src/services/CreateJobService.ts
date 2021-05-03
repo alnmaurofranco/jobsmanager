@@ -2,6 +2,7 @@ import Job from '@database/entities/Job';
 import { JobRepository } from '@database/repositories/JobRepository';
 import HttpException from '@errors/httpException';
 import { getCustomRepository } from 'typeorm';
+import RedisCache from '../implementations/RedisCache';
 
 interface IRequest {
   name: string;
@@ -12,6 +13,7 @@ interface IRequest {
 
 class CreateJobService {
   private jobsRepository = getCustomRepository(JobRepository);
+  private cacheProvider = new RedisCache();
 
   public async execute({
     name,
@@ -33,6 +35,7 @@ class CreateJobService {
     });
 
     await this.jobsRepository.save(job);
+    await this.cacheProvider.invalidatePrefix('jobs-list');
 
     return job;
   }

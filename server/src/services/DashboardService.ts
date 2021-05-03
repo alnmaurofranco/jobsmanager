@@ -13,7 +13,6 @@ interface IResponse {
   jobs: Job[];
   statusCount: Object;
   freeHours: number;
-  //profile: {};
 }
 
 class DashboardService {
@@ -32,10 +31,6 @@ class DashboardService {
         user_id: user.id,
       },
     });
-
-    // if (jobs.length === 0 || jobs.length <= 0) {
-    //   throw new HttpException(404, 'not found jobs');
-    // }
 
     const statusCount = {
       progress: 0,
@@ -78,7 +73,6 @@ class DashboardService {
       jobs: updatedJobs,
       statusCount,
       freeHours,
-      //profile: user.profile,
     };
   }
 }

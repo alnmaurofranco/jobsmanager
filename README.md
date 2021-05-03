@@ -15,12 +15,16 @@ Ultima atualização em: **03.05.2021**
   - [] Rate Limiting
   - [] Express Bruce Force
 - [x] DELETE PROFILE
+- [x] API CACHE 'feature/cachedb'
+  - [x] USERS /users
+  - [x] JOBS /jobs
+  - [x] PROFILE
 - [] DEPLOY VERCEL FRONT-END
 - [] DEPLOY HEROKU BACK-END
 
 ## WEB
 
-- [] feature/change-stylesweb
+- [x] feature/change-stylesweb
 
   - [x] LOGOTIPO 'JOBSMANAGER'
   - [x] FAVICON

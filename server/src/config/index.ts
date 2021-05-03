@@ -1,6 +1,7 @@
 import './env';
 import auth from './auth';
 import cors from './cors';
+import cache from './cache';
 
 const { NODE_PORT, NODE_URL } = process.env;
 
@@ -14,4 +15,4 @@ const server = {
   baseURL: NODE_URL,
 } as IServer;
 
-export { server, auth, cors };
+export { server, auth, cors, cache };
