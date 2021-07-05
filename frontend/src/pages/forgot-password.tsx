@@ -37,7 +37,8 @@ const ForgotPassword: React.FC<{}> = () => {
   }, [forgotPassword])
 
   return (
-    <Layout title="Recuperação da conta">
+    <>
+      <Layout title="Recuperação da conta" />
       <div className="bg-indigo-100 grid grid-cols-1 lg:grid-cols-2 ">
         <div className="bg-green-600 lg:min-h-screen lg:flex lg:items-center p-16 sm:p-20">
           <div className="flex-grow">
@@ -88,7 +89,7 @@ const ForgotPassword: React.FC<{}> = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
 

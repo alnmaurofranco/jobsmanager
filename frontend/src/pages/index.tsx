@@ -42,7 +42,8 @@ export default function Home() {
   }
 
   return (
-    <Layout title="Home">
+    <>
+      <Layout title="Home" />
       <div className="min-w-screen min-h-screen text-gray-700 bg-gray-100 flex items-center justify-center py-5">
         <div className="text-center max-w-xl mx-auto">
           <h1 className="text-7xl md:text-8xl font-bold mb-5 text-indigo-600">
@@ -146,6 +147,6 @@ export default function Home() {
           </div>
         </footer>
       </div>
-    </Layout>
+    </>
   )
 }

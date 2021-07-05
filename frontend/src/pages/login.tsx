@@ -55,7 +55,8 @@ const Login: React.FC<{}> = () => {
   }, [signIn])
 
   return (
-    <Layout title="Entrar">
+    <>
+      <Layout title="Entrar" />
       <div className="bg-indigo-100 grid grid-cols-1 lg:grid-cols-2 ">
         <div className="bg-green-600 lg:min-h-screen lg:flex lg:items-center p-16 sm:p-20">
           <div className="flex-grow">
@@ -164,7 +165,7 @@ const Login: React.FC<{}> = () => {
         </>
       ) : null
       }
-    </Layout >
+    </>
   )
 }
 

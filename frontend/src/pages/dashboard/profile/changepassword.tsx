@@ -6,20 +6,16 @@ import Input from '../../../components/Input/index';
 import { Form } from '@unform/web';
 import { useAuth } from '../../../hooks/AuthContext';
 import Image from 'next/image';
+import Layout from '../../../components/Layout/index';
 
 export default function ChangePassword() {
   const { user } = useAuth()
+
   return (
     <div id="page-profile">
-      <Head>
-        <title>Perfil - JobsManager</title>
+      <Layout title="Perfil">
         <link rel="stylesheet" href="/styles/pages/profile.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      </Layout>
 
       <Header title="Perfil" />
 
@@ -36,7 +32,7 @@ export default function ChangePassword() {
             objectFit="cover"
           />
           <h2 style={{ marginBottom: '2.758rem', marginTop: '2rem' }}>
-
+            {user.profile.name}
           </h2>
           <p>
             O valor da sua hora é <br />
@@ -48,7 +44,7 @@ export default function ChangePassword() {
             type="submit"
           >
             Salvar senha
-            </button>
+          </button>
         </aside>
 
         <main>

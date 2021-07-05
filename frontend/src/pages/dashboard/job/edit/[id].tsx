@@ -1,6 +1,5 @@
 import { useCallback, useRef } from 'react';
 import { GetServerSideProps } from 'next';
-import Head from "next/head";
 import Link from 'next/link'
 import * as Yup from 'yup';
 import { api } from '../../../../services/api';
@@ -12,6 +11,7 @@ import Input from '../../../../components/Input/index';
 import getValidationErrors from '../../../../utils/getValidationErrors';
 import { Form } from '@unform/web';
 import { useRouter } from 'next/router';
+import Layout from '../../../../components/Layout/index';
 
 interface IJob {
   id: number;
@@ -64,10 +64,9 @@ export default function EditJob({ job }: IJobData) {
 
   return (
     <body id="page-job">
-      <Head>
-        <title>JobsManager - Job</title>
+      <Layout title="Job">
         <link rel="stylesheet" href="/styles/pages/job.css" />
-      </Head>
+      </Layout>
 
       <Header title={`Job`} />
       <div className="container flex animate-up delay-2">
@@ -92,8 +91,8 @@ export default function EditJob({ job }: IJobData) {
                 <div className="input-wrapper">
                   <label htmlFor="daily-hours">
                     Quantas horas <br />
-                      por dia vai dedicar ao job?
-                    </label>
+                    por dia vai dedicar ao job?
+                  </label>
                   <Input
                     type="number"
                     id="dailyHours"
@@ -106,8 +105,8 @@ export default function EditJob({ job }: IJobData) {
                 <div className="input-wrapper">
                   <label htmlFor="total-hours">
                     Estimativa de <br />
-                      horas para esse Job?
-                    </label>
+                    horas para esse Job?
+                  </label>
                   <Input
                     type="number"
                     id="totalHours"
@@ -132,7 +131,7 @@ export default function EditJob({ job }: IJobData) {
               title="Salvar Dados"
             >
               Salvar
-              </button>
+            </button>
             <Link href="/dashboard">
               <a className="button gray focus:outline-none">
                 <img

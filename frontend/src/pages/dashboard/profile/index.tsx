@@ -1,16 +1,16 @@
-import Head from "next/head";
+import { useCallback, useRef, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link'
+import Image from 'next/image';
 import Header from "../../../components/Dashboard/Header";
 import { api } from '../../../services/api';
-import { GetServerSideProps } from 'next';
 import Input from '../../../components/Input/index';
 import { Form } from '@unform/web';
-import { useCallback, useRef, useState } from 'react';
 import { useAuth } from '../../../hooks/AuthContext';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErrors';
-import Image from 'next/image';
+import Layout from '../../../components/Layout/index';
 
 interface IUserProfile {
   id: string;
@@ -97,15 +97,9 @@ export default function Profile({ user }: IUserData) {
 
   return (
     <div id="page-profile">
-      <Head>
-        <title>JobsManager - Perfil</title>
+      <Layout title="Perfil">
         <link rel="stylesheet" href="/styles/pages/profile.css" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      </Layout>
 
       <Header title="Perfil" />
 
@@ -137,7 +131,7 @@ export default function Profile({ user }: IUserData) {
             type="submit"
           >
             Salvar dados
-            </button>
+          </button>
         </aside>
 
         <main>
@@ -213,8 +207,8 @@ export default function Profile({ user }: IUserData) {
                 <div className="input-wrapper">
                   <label htmlFor="monthlyBudget">
                     Quanto eu <br />
-                      quero ganhar por mês?
-                    </label>
+                    quero ganhar por mês?
+                  </label>
                   <Input
                     type="amount"
                     placeholder="R$"
@@ -228,8 +222,8 @@ export default function Profile({ user }: IUserData) {
                 <div className="input-wrapper">
                   <label htmlFor="hoursPerDay">
                     Quantas horas <br />
-                      quero trabalhar por dia?
-                    </label>
+                    quero trabalhar por dia?
+                  </label>
                   <Input
                     type="number"
                     id="hoursPerDay"
@@ -244,8 +238,8 @@ export default function Profile({ user }: IUserData) {
                 <div className="input-wrapper">
                   <label htmlFor="daysPerWeek">
                     Quantos dias <br />
-                      quero trabalhar por semana?
-                    </label>
+                    quero trabalhar por semana?
+                  </label>
                   <Input
                     type="number"
                     id="daysPerWeek"
@@ -258,8 +252,8 @@ export default function Profile({ user }: IUserData) {
                 <div className="input-wrapper">
                   <label htmlFor="vacationPerYear">
                     Quantas semanas <br />
-                      por ano você quer tirar férias?
-                    </label>
+                    por ano você quer tirar férias?
+                  </label>
                   <Input
                     type="number"
                     id="vacationPerYear"
@@ -284,7 +278,7 @@ export default function Profile({ user }: IUserData) {
             />
             <h3>Excluir Conta</h3>
             <p>Quer mesmo excluir sua conta? <br />
-                Ela será apagada para sempre.
+              Ela será apagada para sempre.
             </p>
             <footer>
               <a className="button gray mr-4" onClick={() => setModal(!modal)}>Cancelar</a>
@@ -296,7 +290,7 @@ export default function Profile({ user }: IUserData) {
                   setModal(!modal)
                 }}
               >
-                Excluir Job
+                Excluir
               </button>
             </footer>
           </div>

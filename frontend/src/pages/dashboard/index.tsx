@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react';
 import { api } from '../../services/api'
@@ -7,6 +6,7 @@ import { FiLogOut } from 'react-icons/fi'
 import { useAuth } from '../../hooks/AuthContext';
 import { useConstant } from '../../hooks/ConstantContext';
 import Image from 'next/image';
+import Layout from '../../components/Layout/index';
 
 interface IJobs {
   id: number;
@@ -48,10 +48,9 @@ export default function Dashboard({ data }) {
 
   return (
     <div id="page-index">
-      <Head>
-        <title>Dashboard - JobsManager</title>
+      <Layout title="Dashboard">
         <link rel="stylesheet" href="/styles/pages/index.css" />
-      </Head>
+      </Layout>
 
       <header className="page-header bg-green-700">
         <div className="container">
@@ -103,24 +102,24 @@ export default function Dashboard({ data }) {
             <div className="info">
               <div className="total">
                 <strong>{dashData && dashData.statusCount.total}</strong>
-                  Projetos ao total
-                </div>
+                Projetos ao total
+              </div>
               <div className="in-progress">
                 <strong>{dashData && dashData.statusCount.progress}</strong>
-                  Em andamento
-                </div>
+                Em andamento
+              </div>
               <div className="finished">
                 <strong>{dashData && dashData.statusCount.done}</strong>
-                  Encerrados
-                </div>
+                Encerrados
+              </div>
             </div>
             <Link href="/dashboard/job">
               <a className="button bg-green-800 hover:bg-green-900">
                 <span>
                   <img src="/images/plus-24.svg" alt="Novo Job" />
                 </span>
-                  Adicionar novo job
-                </a>
+                Adicionar novo job
+              </a>
             </Link>
           </section>
         </div>
@@ -198,7 +197,7 @@ export default function Dashboard({ data }) {
             />
             <h3>Excluir Job</h3>
             <p>Quer mesmo excluir esse job? <br />
-                Ele será apagado para sempre.
+              Ele será apagado para sempre.
             </p>
             <footer>
               <a className="button gray mr-4" onClick={() => setModal(!modal)}>Cancelar</a>
