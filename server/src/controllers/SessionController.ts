@@ -16,6 +16,7 @@ class SessionController {
 
   public async signup(req: Request, res: Response) {
     const { name, username, email, password, confirm_password } = req.body;
+    const urlBody = req.headers.host;
 
     const signupService = new SignupService();
 
@@ -25,12 +26,11 @@ class SessionController {
       username,
       confirm_password,
       name,
+      urlHostToSendMail: urlBody,
     });
 
     return res.status(200).json(classToClass(signup));
   }
-
-  // public async forgot(req: Request, res: Response) {}
 }
 
 export default new SessionController();

@@ -10,7 +10,7 @@
     "typeorm": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "db:migration": "yarn typeorm migration:generate -n",
     "db:migrations": "yarn typeorm migration:create -n",
-    "db:migrate": "ya rn typeorm migration:run",
+    "db:migrate": "yarn typeorm migration:run",
     "db:refresh": "yarn typeorm migration:revert",
     "db:drop": "yarn typeorm schema:drop",
     "test": "jest"

@@ -57,6 +57,12 @@ interface IUserProfileData {
   vacationPerYear?: number;
 }
 
+interface IResetPasswordData {
+  token: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
 interface IAuthContextState {
   showModal: boolean;
   authenticated: boolean;
@@ -64,7 +70,7 @@ interface IAuthContextState {
   signIn(credentials: ISignInCredentials): Promise<void>
   signOut(): void;
   forgotPassword: (email: string) => void;
-  resetPassword: (password: string, confirmPassword: string) => void;
+  resetPassword: (data: IResetPasswordData) => void;
   togglePasswordVisiblity: () => void;
   toggleConfirmPasswordVisiblity: () => void;
   passwordShown: boolean;
@@ -179,7 +185,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const forgotPassword = useCallback(async ({ email }) => {
     try {
-      //const response = await api.post('/');
+      const response = await api.post('/password/forgot', { email });
+
+      MySwal.fire({
+        title: 'Recuperação da conta',
+        text: 'E-mail enviado com sucesso.',
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1600
+      })
     } catch (error) {
       error.response ?
         MySwal.fire({
@@ -190,8 +204,11 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }, [])
 
-  const resetPassword = useCallback(async ({ password, confirmPassword }) => {
+  const resetPassword = useCallback(async ({ token, newPassword, confirmNewPassword }: IResetPasswordData) => {
     try {
+      const response = await api.post('/password/reset', {
+        token, newPassword, confirmNewPassword
+      })
 
     } catch (error) {
       error.response ?

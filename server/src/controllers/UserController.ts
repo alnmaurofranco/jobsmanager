@@ -1,5 +1,5 @@
-import FindAllUsersService from '@services/FindAllUsersService';
 import { Request, Response } from 'express';
+import FindAllUsersService from '@services/FindAllUsersService';
 import { classToClass } from 'class-transformer';
 import ShowUserService from '@services/ShowUserService';
 import CreateUserService from '@services/CreateUserService';
