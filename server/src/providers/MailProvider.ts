@@ -1,6 +1,7 @@
 import nodemailer, { Transporter } from 'nodemailer';
-import { IParseMailTemplate } from './MailTemplateProvider';
-import { IMailTemplateProvider } from './MailTemplateProvider';
+import MailTemplateProvider, {
+  IParseMailTemplate,
+} from './MailTemplateProvider';
 
 interface IMailContact {
   name: string;
@@ -20,7 +21,8 @@ interface IMailProvider {
 
 export default class MailProvider implements IMailProvider {
   private client: Transporter;
-  private mailTemplateProvider: IMailTemplateProvider;
+
+  private mailTemplateProvider = new MailTemplateProvider(); // :IMailProviderTemplate
 
   constructor() {
     const transporter = nodemailer.createTransport({
@@ -41,7 +43,7 @@ export default class MailProvider implements IMailProvider {
     subject,
     templateData,
   }: ISendMail): Promise<void> {
-    const message = await this.client.sendMail({
+    await this.client.sendMail({
       from: {
         name: from?.name || 'Equipe JobsManager',
         address: from?.email || 'jobsmanager@support.com',

@@ -71,12 +71,6 @@ const Login: React.FC<{}> = () => {
           <div className="flex-grow bg-white shadow-xl rounded-md border border-gray-300 p-8">
             <div className="text-center">
               <p className="text-2xl font-medium text-gray-900">FAÇA LOGIN NA SUA CONTA</p>
-
-              <div className="relative mt-10 h-px bg-gray-300">
-                <div className="absolute left-0 top-0 flex justify-center w-full -mt-2">
-                  <span className="bg-white px-4 text-xs text-gray-500 uppercase">Ou Entrar com Email</span>
-                </div>
-              </div>
             </div>
 
             <Form className="mt-8" ref={formRef} onSubmit={handleSubmit}>

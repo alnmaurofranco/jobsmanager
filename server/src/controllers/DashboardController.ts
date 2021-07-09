@@ -1,5 +1,5 @@
-import DashboardService from '@services/DashboardService';
 import { Request, Response } from 'express';
+import DashboardService from '@services/DashboardService';
 
 class DashboardController {
   public async index(req: Request, res: Response) {

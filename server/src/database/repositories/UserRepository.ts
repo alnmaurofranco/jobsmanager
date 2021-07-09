@@ -1,5 +1,5 @@
-import User from '@database/entities/User';
 import { EntityRepository, Repository } from 'typeorm';
+import User from '@database/entities/User';
 
 @EntityRepository(User)
 class UserRepository extends Repository<User> {
@@ -34,10 +34,18 @@ class UserRepository extends Repository<User> {
     return user;
   }
 
-  public async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.findOne({ where: { email } });
+  public async findByEmail(
+    email: string,
+    isProfile = false
+  ): Promise<User | undefined> {
+    if (isProfile === true) {
+      return await this.findOne({
+        where: { email },
+        relations: ['profile'],
+      });
+    }
 
-    return user;
+    return await this.findOne({ where: { email } });
   }
 }
 

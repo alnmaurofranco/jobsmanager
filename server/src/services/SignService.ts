@@ -35,6 +35,13 @@ class SignService {
       throw new HttpException(400, 'Incorrect email/password combination.');
     }
 
+    if (user.email_verification === false) {
+      throw new HttpException(
+        400,
+        `You need to verify your email address for realize access in plataform`
+      );
+    }
+
     if (user.active === false) {
       const desactiveDate = format(user.updated_at, 'dd MMMM');
       throw new HttpException(

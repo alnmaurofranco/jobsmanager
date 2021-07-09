@@ -4,14 +4,18 @@ import jobRoutes from './job.routes';
 import profileRoutes from './profile.routes';
 import sessionRoutes from './session.routes';
 import usersRoutes from './users.routes';
+import emailRoutes from './email.routes';
+import passwordRoutes from './password.routes';
 
 const routesapi = Router();
 
-routesapi.get('/', (_req: Request, res: Response) => {
+routesapi.get('/', (req: Request, res: Response) => {
   return res.json({ message: 'Welcome to Generator NodeJS API' });
 });
 
 routesapi.use('/session', sessionRoutes);
+routesapi.use('/email', emailRoutes);
+routesapi.use('/password', passwordRoutes);
 routesapi.use('/dashboard', dashboardRoutes);
 routesapi.use('/job', jobRoutes);
 routesapi.use('/users', usersRoutes);
