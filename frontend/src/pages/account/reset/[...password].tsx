@@ -21,7 +21,7 @@ interface IResetPassword {
   confirmNewPassword: string
 }
 
-const ResetPassword: React.FC = ({ token }: any) => {
+const ResetPassword: React.FC = ({ token }: never) => {
   const formRef = useRef<FormHandles>(null)
   const {
     resetPassword,

@@ -1,11 +1,5 @@
 import { useRouter } from 'next/router'
-import {
-  createContext,
-  useCallback,
-  useState,
-  useContext,
-  useEffect
-} from 'react'
+import { createContext, useCallback, useState } from 'react'
 import { api } from '../services/api'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -127,7 +121,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 
         router.push('/login')
       } catch (error) {
-        error.response ? resError : router.push('500')
+        if (error.response) {
+          MySwal.fire({
+            title: 'Ops!',
+            text: error.response.data,
+            icon: 'error'
+          })
+          return
+        }
+        router.push('500')
       }
     },
     []
@@ -174,7 +176,15 @@ export const AuthProvider: React.FC = ({ children }) => {
       }, 1200)
     } catch (error) {
       setShowModal(false)
-      error.response ? resError : router.push('500')
+      if (error.response) {
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: 'error'
+        })
+        return
+      }
+      router.push('500')
       //return Promise.reject(error.response.data);
     }
   }, [])
@@ -199,7 +209,15 @@ export const AuthProvider: React.FC = ({ children }) => {
         timer: 1600
       })
     } catch (error) {
-      error.response ? resError : router.push('500')
+      if (error.response) {
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: 'error'
+        })
+        return
+      }
+      router.push('500')
     }
   }, [])
 
@@ -221,7 +239,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 
         router.push('/login')
       } catch (error) {
-        error.response ? resError : router.push('500')
+        if (error.response) {
+          MySwal.fire({
+            title: 'Ops!',
+            text: error.response.data,
+            icon: 'error'
+          })
+          return
+        }
+        router.push('500')
       }
     },
     []
@@ -262,7 +288,15 @@ export const AuthProvider: React.FC = ({ children }) => {
         localStorage.removeItem('@JobsManager:user')
         router.push('/login')
       } catch (error) {
-        error.response ? resError : router.push('500')
+        if (error.response) {
+          MySwal.fire({
+            title: 'Ops!',
+            text: error.response.data,
+            icon: 'error'
+          })
+          return
+        }
+        router.push('500')
       }
     },
     []
@@ -331,7 +365,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 
         router.push('/dashboard/profile')
       } catch (error) {
-        error.response ? resError : router.push('500')
+        if (error.response) {
+          MySwal.fire({
+            title: 'Ops!',
+            text: error.response.data,
+            icon: 'error'
+          })
+          return
+        }
+        router.push('500')
       }
     },
     []
@@ -351,7 +393,15 @@ export const AuthProvider: React.FC = ({ children }) => {
       localStorage.removeItem('@JobsManager:user')
       router.push('/login')
     } catch (error) {
-      error.response ? resError : router.push('500')
+      if (error.response) {
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: 'error'
+        })
+        return
+      }
+      router.push('500')
     }
   }, [])
 
@@ -379,10 +429,3 @@ export const AuthProvider: React.FC = ({ children }) => {
     </AuthContext.Provider>
   )
 }
-
-export const resError = (error: any) =>
-  MySwal.fire({
-    title: 'Ops!',
-    text: error.response.data,
-    icon: 'error'
-  })

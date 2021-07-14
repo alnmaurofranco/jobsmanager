@@ -4,7 +4,6 @@ import { api } from '../services/api'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import Cookie from 'js-cookie'
-import { resError } from './AuthContext'
 const MySwal = withReactContent(Swal)
 
 interface IJobData {
@@ -48,7 +47,15 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
         router.push('/dashboard')
       } catch (error) {
-        error.response ? resError : router.push('500')
+        if (error.response) {
+          MySwal.fire({
+            title: 'Ops!',
+            text: error.response.data,
+            icon: 'error'
+          })
+          return
+        }
+        router.push('500')
       }
     },
     []
@@ -81,7 +88,15 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
         router.push('/dashboard')
       } catch (error) {
-        error.response ? resError : router.push('500')
+        if (error.response) {
+          MySwal.fire({
+            title: 'Ops!',
+            text: error.response.data,
+            icon: 'error'
+          })
+          return
+        }
+        router.push('500')
       }
     },
     []
@@ -98,7 +113,15 @@ export const ConstantProvider: React.FC = ({ children }) => {
 
       router.push('/dashboard')
     } catch (error) {
-      error.response ? resError : router.push('500')
+      if (error.response) {
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: 'error'
+        })
+        return
+      }
+      router.push('500')
     }
   }, [])
 

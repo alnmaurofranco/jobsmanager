@@ -9,10 +9,9 @@ import { useField } from '@unform/core'
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
-  icon?: React.ComponentType
 }
 
-const Input: React.FC<IInputProps> = ({ name, icon: Icon, ...rest }) => {
+const Input: React.FC<IInputProps> = ({ name, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null)
   const [isFocused, setIsFocused] = useState(false)
   const [isFilled, setIsFilled] = useState(false)
