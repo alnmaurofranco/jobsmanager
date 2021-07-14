@@ -1,5 +1,3 @@
-
-
 import { ButtonHTMLAttributes } from 'react'
 
 type IButtonProps = ButtonHTMLAttributes<HTMLButtonElement>

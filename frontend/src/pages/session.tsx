@@ -1,6 +1,6 @@
-import Layout from "../components/Layout"
+import Layout from '../components/Layout'
 
-const session: React.FC<{}> = () => {
+const Session: React.FC = () => {
   return (
     <>
       <Layout title="" />
@@ -10,7 +10,9 @@ const session: React.FC<{}> = () => {
             <h1 className="text-white text-center text-2xl sm:text-5xl mb-2">
               Seja bem-vindo(a)
             </h1>
-            <p className="text-center text-green-200 sm:text-lg">Faça seu login :3</p>
+            <p className="text-center text-green-200 sm:text-lg">
+              Faça seu login :3
+            </p>
           </div>
         </div>
 
@@ -43,7 +45,10 @@ const session: React.FC<{}> = () => {
                 placeholder="Digite sua senha..."
                 className="flex-1 w-full text-gray-700 bg-gray-200 rounded-md hover:bg-white border border-gray-200 outline-none focus:bg-white py-2 px-4"
               />
-              <button type="button" className="flex-shrink-0 bg-gray-800 hover:bg-gray-900 outline-none py-2 px-4 ml-4 text-white font-semibold rounded-md">
+              <button
+                type="button"
+                className="flex-shrink-0 bg-gray-800 hover:bg-gray-900 outline-none py-2 px-4 ml-4 text-white font-semibold rounded-md"
+              >
                 Entrar
               </button>
             </form>
@@ -54,4 +59,4 @@ const session: React.FC<{}> = () => {
   )
 }
 
-export default session
+export default Session

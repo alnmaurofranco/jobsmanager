@@ -1,24 +1,30 @@
-import { InputHTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
+import {
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { useField } from '@unform/core'
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
-  icon?: React.ComponentType;
+  name: string
+  icon?: React.ComponentType
 }
 
 const Input: React.FC<IInputProps> = ({ name, icon: Icon, ...rest }) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
+  const [isFocused, setIsFocused] = useState(false)
+  const [isFilled, setIsFilled] = useState(false)
 
-  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const { fieldName, defaultValue, error, registerField } = useField(name)
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true)
   }, [])
 
   const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
+    setIsFocused(false)
 
     setIsFilled(!!inputRef.current?.value) // !! transforma em boolean
   }, [])

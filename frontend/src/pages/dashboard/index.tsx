@@ -1,41 +1,42 @@
+/* eslint-disable prettier/prettier */
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
-import { useState } from 'react';
+import { useState } from 'react'
 import { api } from '../../services/api'
 import { FiLogOut } from 'react-icons/fi'
-import Image from 'next/image';
-import Layout from '../../components/Layout/index';
-import { useAuth } from '../../hooks/useAuth';
-import { useConstant } from '../../hooks/useConstant';
+import Image from 'next/image'
+import Layout from '../../components/Layout/index'
+import { useAuth } from '../../hooks/useAuth'
+import { useConstant } from '../../hooks/useConstant'
 
 interface IJobs {
-  id: number;
-  name: string;
-  daily_hours: number;
-  total_hours: number;
-  remaining: number;
-  status: string;
-  budget: number;
+  id: number
+  name: string
+  daily_hours: number
+  total_hours: number
+  remaining: number
+  status: string
+  budget: number
 }
 
 interface IProfile {
-  name: string;
-  avatar: string;
-  monthly_budget: number;
-  days_per_day: number;
-  hours_per_day: number;
-  vacation_per_year: number;
-  value_hour: number;
+  name: string
+  avatar: string
+  monthly_budget: number
+  days_per_day: number
+  hours_per_day: number
+  vacation_per_year: number
+  value_hour: number
 }
 
 interface IDashboardData {
-  jobs: IJobs[];
+  jobs: IJobs[]
   statusCount: {
-    progress: number;
-    done: number;
-    total: number;
+    progress: number
+    done: number
+    total: number
   }
-  freeHours: number;
+  freeHours: number
   profile: IProfile
 }
 
@@ -74,9 +75,11 @@ export default function Dashboard({ data }) {
                 <Image
                   width={180}
                   height={180}
-                  src={`${user?.profile.avatar
-                    ? user?.profile.avatar
-                    : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`}`}
+                  src={`
+                  ${user?.profile.avatar
+                      ? user?.profile.avatar
+                      : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`
+                    }`}
                   alt={user?.profile.name}
                   className="profile-avatar"
                   objectFit="cover"
@@ -84,7 +87,11 @@ export default function Dashboard({ data }) {
               </a>
             </Link>
 
-            <button type="button" className="flex items-center justify-items-center focus:outline-none" onClick={signOut}>
+            <button
+              type="button"
+              className="flex items-center justify-items-center focus:outline-none"
+              onClick={signOut}
+            >
               Sair
               <FiLogOut
                 size={26}
@@ -144,45 +151,54 @@ export default function Dashboard({ data }) {
                   style={{ margin: '5rem auto' }}
                 />
               </div>
-            ) : dashData?.jobs.map((job) => (
-              <div className={`card ${job.status}`} key={job.id}>
-                <div className="id column">{job.id}</div>
-                <div className="name column">{job.name}</div>
-                <div className="deadline column">
-                  <span>Prazo</span>
-                  <p>
-                    {job.status === 'progress' ? `${job.remaining} dias para a entrega` : 'Prazo encerrado'}
-                  </p>
+            ) : (
+              dashData?.jobs.map(job => (
+                <div className={`card ${job.status}`} key={job.id}>
+                  <div className="id column">{job.id}</div>
+                  <div className="name column">{job.name}</div>
+                  <div className="deadline column">
+                    <span>Prazo</span>
+                    <p>
+                      {job.status === 'progress'
+                        ? `${job.remaining} dias para a entrega`
+                        : 'Prazo encerrado'}
+                    </p>
+                  </div>
+                  <div className="amount column">
+                    <span>Valor</span>
+                    <p>
+                      {job.budget.toLocaleString('pt-br', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }) || ''}
+                    </p>
+                  </div>
+                  <div className="status badge column">
+                    <p>
+                      {job.status === 'done' ? 'Encerrado' : 'Em andamento'}
+                    </p>
+                  </div>
+                  <div className="actions column flex">
+                    <p className="sr-only">Ações</p>
+                    <Link href={`/dashboard/job/edit/${job.id}`}>
+                      <a className="button white edit" title="Editar Job">
+                        <img src="/images/edit-24.svg" alt="Editar Job" />
+                      </a>
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setModal(true)
+                        setJoob(job.id)
+                      }}
+                      className="delete button white focus:outline-none"
+                      title="Excluir Job"
+                    >
+                      <img src="/images/trash-24.svg" alt="Excluir Job" />
+                    </button>
+                  </div>
                 </div>
-                <div className="amount column">
-                  <span>Valor</span>
-                  <p>{job.budget.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || ''}</p>
-                </div>
-                <div className="status badge column">
-                  <p>
-                    {job.status === 'done' ? 'Encerrado' : 'Em andamento'}
-                  </p>
-                </div>
-                <div className="actions column flex">
-                  <p className="sr-only">Ações</p>
-                  <Link href={`/dashboard/job/edit/${job.id}`}>
-                    <a className="button white edit" title="Editar Job">
-                      <img src="/images/edit-24.svg" alt="Editar Job" />
-                    </a>
-                  </Link>
-                  <button
-                    onClick={() => {
-                      setModal(true)
-                      setJoob(job.id)
-                    }}
-                    className="delete button white focus:outline-none"
-                    title="Excluir Job"
-                  >
-                    <img src="/images/trash-24.svg" alt="Excluir Job" />
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </main>
       </div>
@@ -196,11 +212,14 @@ export default function Dashboard({ data }) {
               className="m-auto"
             />
             <h3>Excluir Job</h3>
-            <p>Quer mesmo excluir esse job? <br />
+            <p>
+              Quer mesmo excluir esse job? <br />
               Ele será apagado para sempre.
             </p>
             <footer>
-              <a className="button gray mr-4" onClick={() => setModal(!modal)}>Cancelar</a>
+              <a className="button gray mr-4" onClick={() => setModal(!modal)}>
+                Cancelar
+              </a>
               <button
                 className="button red focus:outline-none"
                 type="submit"
@@ -226,7 +245,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     return {
       redirect: {
         destination: '/login',
-        permanent: false,
+        permanent: false
       }
     }
   }
@@ -238,7 +257,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       }
     })
 
-    const data: IDashboardData = res.data;
+    const data: IDashboardData = res.data
 
     return {
       props: {
@@ -249,9 +268,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     return {
       redirect: {
         destination: '/login',
-        permanent: false,
+        permanent: false
       }
     }
   }
-
 }

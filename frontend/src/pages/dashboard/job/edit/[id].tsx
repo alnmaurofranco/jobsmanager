@@ -1,30 +1,30 @@
-import { useCallback, useRef } from 'react';
-import { GetServerSideProps } from 'next';
+import { useCallback, useRef } from 'react'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
-import * as Yup from 'yup';
-import { api } from '../../../../services/api';
-import { FormHandles } from '@unform/core';
+import * as Yup from 'yup'
+import { api } from '../../../../services/api'
+import { FormHandles } from '@unform/core'
 
-import Header from "../../../../components/Dashboard/Header";
-import Input from '../../../../components/Input/index';
-import getValidationErrors from '../../../../utils/getValidationErrors';
-import { Form } from '@unform/web';
-import { useRouter } from 'next/router';
-import Layout from '../../../../components/Layout/index';
-import { useConstant } from '../../../../hooks/useConstant';
+import Header from '../../../../components/Dashboard/Header'
+import Input from '../../../../components/Input/index'
+import getValidationErrors from '../../../../utils/getValidationErrors'
+import { Form } from '@unform/web'
+import { useRouter } from 'next/router'
+import Layout from '../../../../components/Layout/index'
+import { useConstant } from '../../../../hooks/useConstant'
 
 interface IJob {
-  id: number;
-  name: string;
-  dailyHours: number;
-  totalHours: number;
-  userId?: string;
-  budget: number;
-  createdAt?: string;
+  id: number
+  name: string
+  dailyHours: number
+  totalHours: number
+  userId?: string
+  budget: number
+  createdAt?: string
 }
 
 interface IJobData {
-  job: IJob;
+  job: IJob
 }
 
 export default function EditJob({ job }: IJobData) {
@@ -32,35 +32,38 @@ export default function EditJob({ job }: IJobData) {
   const formRef = useRef<FormHandles>(null)
   const { updateJob } = useConstant()
 
-  const handleUpdateToJob = useCallback(async (data: IJob) => {
-    try {
-      formRef.current.setErrors({})
+  const handleUpdateToJob = useCallback(
+    async (data: IJob) => {
+      try {
+        formRef.current.setErrors({})
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome do projeto é obrigatório'),
-        dailyHours: Yup.number()
-          .typeError('Você deve especificar um número')
-          .required('Horas por dia vai dedicar ao job é obrigatório'),
-        totalHours: Yup.number()
-          .typeError('Você deve especificar um número')
-          .required('Estimativa de horas é obrigatório'),
-      })
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome do projeto é obrigatório'),
+          dailyHours: Yup.number()
+            .typeError('Você deve especificar um número')
+            .required('Horas por dia vai dedicar ao job é obrigatório'),
+          totalHours: Yup.number()
+            .typeError('Você deve especificar um número')
+            .required('Estimativa de horas é obrigatório')
+        })
 
-      await schema.validate(data, {
-        abortEarly: false,
-      })
+        await schema.validate(data, {
+          abortEarly: false
+        })
 
-      updateJob({
-        id: Number(router.query.id),
-        name: data.name,
-        dailyHours: data.dailyHours,
-        totalHours: data.totalHours
-      })
-    } catch (err) {
-      const errors = getValidationErrors(err)
-      formRef.current?.setErrors(errors)
-    }
-  }, [updateJob])
+        updateJob({
+          id: Number(router.query.id),
+          name: data.name,
+          dailyHours: data.dailyHours,
+          totalHours: data.totalHours
+        })
+      } catch (err) {
+        const errors = getValidationErrors(err)
+        formRef.current?.setErrors(errors)
+      }
+    },
+    [updateJob]
+  )
 
   return (
     <body id="page-job">
@@ -122,7 +125,15 @@ export default function EditJob({ job }: IJobData) {
 
         <aside className="card">
           <img src="/images/money-color.svg" alt="Imagem de Dinheiro" />
-          <p>O valor do projeto ficou em <strong>{job.budget.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) || ''}</strong></p>
+          <p>
+            O valor do projeto ficou em{' '}
+            <strong>
+              {job.budget.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL'
+              }) || ''}
+            </strong>
+          </p>
           <div className="button-group">
             <button
               className="button green mr-2 focus:outline-none"
@@ -145,19 +156,21 @@ export default function EditJob({ job }: IJobData) {
         </aside>
       </div>
     </body>
-  );
+  )
 }
 
-
-export const getServerSideProps: GetServerSideProps = async ({ params, req }) => {
-  const { token } = req.cookies;
-  const { id } = params;
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req
+}) => {
+  const { token } = req.cookies
+  const { id } = params
 
   if (!token) {
     return {
       redirect: {
         destination: '/login',
-        permanent: false,
+        permanent: false
       }
     }
   }
@@ -169,7 +182,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
       }
     })
 
-    const data = response.data;
+    const data = response.data
 
     const job = {
       id: data.job.id,
@@ -186,7 +199,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req }) =>
         job
       }
     }
-
   } catch (error) {
     return {
       notFound: true

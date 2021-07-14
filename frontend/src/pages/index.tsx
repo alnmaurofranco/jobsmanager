@@ -1,10 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import Separator from '../components/Separator/index'
-import { useRouter } from 'next/router'
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth'
 
-export default function Home() {
+const Home: React.FC = () => {
   const { user } = useAuth()
   const router = useRouter()
   const { locale } = router
@@ -128,3 +128,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

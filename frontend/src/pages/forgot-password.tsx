@@ -1,40 +1,42 @@
-import { FormEvent, useCallback, useState, useRef } from 'react';
-import Link from 'next/link';
-import * as Yup from 'yup';
-import { Form } from '@unform/web';
-import { FormHandles } from '@unform/core';
-import { IoAt, IoArrowBackOutline } from 'react-icons/io5';
+import { FormHandles } from '@unform/core'
+import { Form } from '@unform/web'
+import Link from 'next/link'
+import { useCallback, useRef } from 'react'
+import { IoArrowBackOutline, IoAt } from 'react-icons/io5'
+import * as Yup from 'yup'
+import Button from '../components/Button/index'
+import Input from '../components/Input/index'
+import Layout from '../components/Layout'
+import { useAuth } from '../hooks/useAuth'
+import getValidationErrors from '../utils/getValidationErrors'
 
-import Layout from "../components/Layout"
-import Input from '../components/Input/index';
-import getValidationErrors from '../utils/getValidationErrors';
-import Button from '../components/Button/index';
-import { useAuth } from '../hooks/useAuth';
-
-const ForgotPassword: React.FC<{}> = () => {
+const ForgotPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const { forgotPassword } = useAuth()
 
-  const handleForgotPassword = useCallback(async (email: string) => {
-    try {
-      formRef.current.setErrors({})
+  const handleForgotPassword = useCallback(
+    async (email: string) => {
+      try {
+        formRef.current.setErrors({})
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido')
-      })
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido')
+        })
 
-      await schema.validate(email, {
-        abortEarly: false,
-      })
+        await schema.validate(email, {
+          abortEarly: false
+        })
 
-      forgotPassword(email)
-    } catch (err) {
-      const errors = getValidationErrors(err)
-      formRef.current?.setErrors(errors)
-    }
-  }, [forgotPassword])
+        forgotPassword(email)
+      } catch (err) {
+        const errors = getValidationErrors(err)
+        formRef.current?.setErrors(errors)
+      }
+    },
+    [forgotPassword]
+  )
 
   return (
     <>
@@ -46,7 +48,8 @@ const ForgotPassword: React.FC<{}> = () => {
               Recuperação da conta
             </h1>
             <p className="text-center text-green-200 sm:text-lg">
-              Insira seu email para procurar sua conta.</p>
+              Insira seu email para procurar sua conta.
+            </p>
           </div>
 
           <div className="m-auto mt-0">
@@ -61,10 +64,16 @@ const ForgotPassword: React.FC<{}> = () => {
         <div className="lg-min-h-screen lg:flex lg:items-center p-24 lg:p-24 sm:p-18 xl:p-20 2xl:p-48">
           <div className="flex-grow bg-white shadow-xl rounded-md border border-gray-300 p-8">
             <div className="text-center">
-              <p className="text-2xl font-medium text-gray-900">Encontre sua conta</p>
+              <p className="text-2xl font-medium text-gray-900">
+                Encontre sua conta
+              </p>
             </div>
 
-            <Form className="mt-8" ref={formRef} onSubmit={handleForgotPassword}>
+            <Form
+              className="mt-8"
+              ref={formRef}
+              onSubmit={handleForgotPassword}
+            >
               <div className="flex flex-col mb-6">
                 <div className="relative">
                   <div className="inline-flex items-center justify-center absolute left-0 top-0 h-14 w-10 text-gray-400">
@@ -81,7 +90,10 @@ const ForgotPassword: React.FC<{}> = () => {
               </div>
 
               <div className="flex w-full">
-                <Button type="submit" className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in">
+                <Button
+                  type="submit"
+                  className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in"
+                >
                   <span className="mr-2 uppercase">Continuar</span>
                 </Button>
               </div>

@@ -1,27 +1,34 @@
-import { useState, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react'
 import Link from 'next/link'
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 import { AiOutlineLock } from 'react-icons/ai'
-import { IoEyeOutline, IoEyeOffOutline, IoAt, IoPersonCircleOutline, IoTextSharp, IoArrowBackOutline } from 'react-icons/io5';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
+import {
+  IoEyeOutline,
+  IoEyeOffOutline,
+  IoAt,
+  IoPersonCircleOutline,
+  IoTextSharp,
+  IoArrowBackOutline
+} from 'react-icons/io5'
+import { FormHandles } from '@unform/core'
+import { Form } from '@unform/web'
 
-import getValidationErrors from '../utils/getValidationErrors';
-import Layout from "../components/Layout"
-import Input from '../components/Input/index';
-import withAuthLogged from '../components/withAuthLogged';
-import Button from '../components/Button/index';
-import { useAuth } from '../hooks/useAuth';
+import getValidationErrors from '../utils/getValidationErrors'
+import Layout from '../components/Layout'
+import Input from '../components/Input/index'
+import withAuthLogged from '../components/withAuthLogged'
+import Button from '../components/Button/index'
+import { useAuth } from '../hooks/useAuth'
 
 interface ISignupData {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  name: string
+  username: string
+  email: string
+  password: string
+  confirmPassword: string
 }
 
-const Register: React.FC<{}> = () => {
+const Register: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const {
     signup,
@@ -31,37 +38,43 @@ const Register: React.FC<{}> = () => {
     toggleConfirmPasswordVisiblity
   } = useAuth()
 
-  const handleRegister = useCallback(async (data: ISignupData) => {
-    try {
-      formRef.current?.setErrors({})
+  const handleRegister = useCallback(
+    async (data: ISignupData) => {
+      try {
+        formRef.current?.setErrors({})
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome é obrigatório'),
-        username: Yup.string().required('Nome de usuário é obrigatório'),
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido')
-          .lowercase(),
-        password: Yup.string().required('Senha obrigatória'),
-        confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'As senhas devem corresponder')
-      })
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome é obrigatório'),
+          username: Yup.string().required('Nome de usuário é obrigatório'),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido')
+            .lowercase(),
+          password: Yup.string().required('Senha obrigatória'),
+          confirmPassword: Yup.string().oneOf(
+            [Yup.ref('password'), null],
+            'As senhas devem corresponder'
+          )
+        })
 
-      await schema.validate(data, {
-        abortEarly: false,
-      })
+        await schema.validate(data, {
+          abortEarly: false
+        })
 
-      signup({
-        name: data.name,
-        username: data.username,
-        email: data.email,
-        password: data.password,
-        confirmPassword: data.confirmPassword
-      })
-    } catch (err) {
-      const errors = getValidationErrors(err)
-      formRef.current?.setErrors(errors)
-    }
-  }, [signup])
+        signup({
+          name: data.name,
+          username: data.username,
+          email: data.email,
+          password: data.password,
+          confirmPassword: data.confirmPassword
+        })
+      } catch (err) {
+        const errors = getValidationErrors(err)
+        formRef.current?.setErrors(errors)
+      }
+    },
+    [signup]
+  )
 
   return (
     <>
@@ -72,7 +85,9 @@ const Register: React.FC<{}> = () => {
             <h1 className="text-white text-center text-2xl sm:text-5xl mb-2">
               Cadastre-se no JobsManager
             </h1>
-            <p className="text-center text-green-200 sm:text-lg">Faça agora mesmo seu cadastro na plataforma.</p>
+            <p className="text-center text-green-200 sm:text-lg">
+              Faça agora mesmo seu cadastro na plataforma.
+            </p>
           </div>
 
           <div className="m-auto mt-0">
@@ -90,7 +105,9 @@ const Register: React.FC<{}> = () => {
               <p className="text-2xl font-medium text-gray-900">CADASTRO</p>
               <div className="relative mt-10 h-px bg-gray-300">
                 <div className="absolute left-0 top-0 flex justify-center w-full -mt-2">
-                  <span className="bg-white px-4 text-xs text-gray-500 uppercase">Ou Cadastrar com Email</span>
+                  <span className="bg-white px-4 text-xs text-gray-500 uppercase">
+                    Ou Cadastrar com Email
+                  </span>
                 </div>
               </div>
             </div>
@@ -145,13 +162,20 @@ const Register: React.FC<{}> = () => {
                     <AiOutlineLock className="h-7 w-7" />
                   </div>
                   <div className="inline-flex items-center justify-center absolute right-0 top-0 h-10 w-14 text-gray-400">
-                    {
-                      passwordShown === true ? <IoEyeOffOutline className="h-7 w-7" onClick={togglePasswordVisiblity} />
-                        : <IoEyeOutline className="h-7 w-7" onClick={togglePasswordVisiblity} />
-                    }
+                    {passwordShown === true ? (
+                      <IoEyeOffOutline
+                        className="h-7 w-7"
+                        onClick={togglePasswordVisiblity}
+                      />
+                    ) : (
+                      <IoEyeOutline
+                        className="h-7 w-7"
+                        onClick={togglePasswordVisiblity}
+                      />
+                    )}
                   </div>
                   <Input
-                    type={passwordShown === true ? "text" : "password"}
+                    type={passwordShown === true ? 'text' : 'password'}
                     name="password"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="Senha"
@@ -165,13 +189,20 @@ const Register: React.FC<{}> = () => {
                     <AiOutlineLock className="h-7 w-7" />
                   </div>
                   <div className="inline-flex items-center justify-center absolute right-0 top-0 h-10 w-14 text-gray-400">
-                    {
-                      confirmPasswordShown === true ? <IoEyeOffOutline className="h-7 w-7" onClick={toggleConfirmPasswordVisiblity} />
-                        : <IoEyeOutline className="h-7 w-7" onClick={toggleConfirmPasswordVisiblity} />
-                    }
+                    {confirmPasswordShown === true ? (
+                      <IoEyeOffOutline
+                        className="h-7 w-7"
+                        onClick={toggleConfirmPasswordVisiblity}
+                      />
+                    ) : (
+                      <IoEyeOutline
+                        className="h-7 w-7"
+                        onClick={toggleConfirmPasswordVisiblity}
+                      />
+                    )}
                   </div>
                   <Input
-                    type={confirmPasswordShown === true ? "text" : "password"}
+                    type={confirmPasswordShown === true ? 'text' : 'password'}
                     name="confirmPassword"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
                     placeholder="Digite a senha novamente..."
@@ -180,7 +211,10 @@ const Register: React.FC<{}> = () => {
               </div>
 
               <div className="flex w-full">
-                <Button type="submit" className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in">
+                <Button
+                  type="submit"
+                  className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in"
+                >
                   <span className="mr-2 uppercase">Cadastrar</span>
                 </Button>
               </div>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 interface IProps {
-  title: string;
+  title: string
 }
 
 export default function Header({ title }: IProps) {

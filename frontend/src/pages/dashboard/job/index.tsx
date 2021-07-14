@@ -1,54 +1,57 @@
-import { useCallback, useRef } from 'react';
-import { GetServerSideProps } from 'next';
-import * as Yup from 'yup';
-import Link from 'next/link';
-import { Form } from '@unform/web';
-import { FormHandles } from '@unform/core';
+import { useCallback, useRef } from 'react'
+import { GetServerSideProps } from 'next'
+import * as Yup from 'yup'
+import Link from 'next/link'
+import { Form } from '@unform/web'
+import { FormHandles } from '@unform/core'
 
-import getValidationErrors from '../../../utils/getValidationErrors';
-import Header from "../../../components/Dashboard/Header";
-import Input from '../../../components/Input/index';
-import Layout from '../../../components/Layout/index';
-import { useConstant } from '../../../hooks/useConstant';
+import getValidationErrors from '../../../utils/getValidationErrors'
+import Header from '../../../components/Dashboard/Header'
+import Input from '../../../components/Input/index'
+import Layout from '../../../components/Layout/index'
+import { useConstant } from '../../../hooks/useConstant'
 
 interface IJobData {
-  name: string;
-  dailyHours: number;
-  totalHours: number;
+  name: string
+  dailyHours: number
+  totalHours: number
 }
 
 export default function Job() {
   const formRef = useRef<FormHandles>(null)
   const { createJob } = useConstant()
 
-  const handleSubmitCreateJob = useCallback(async (data: IJobData) => {
-    try {
-      formRef.current.setErrors({})
+  const handleSubmitCreateJob = useCallback(
+    async (data: IJobData) => {
+      try {
+        formRef.current.setErrors({})
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome do projeto é obrigatório'),
-        dailyHours: Yup.number()
-          .typeError('Você deve especificar um número')
-          .required('Horas por dia vai dedicar ao job é obrigatório'),
-        totalHours: Yup.number()
-          .typeError('Você deve especificar um número')
-          .required('Estimativa de horas é obrigatório'),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome do projeto é obrigatório'),
+          dailyHours: Yup.number()
+            .typeError('Você deve especificar um número')
+            .required('Horas por dia vai dedicar ao job é obrigatório'),
+          totalHours: Yup.number()
+            .typeError('Você deve especificar um número')
+            .required('Estimativa de horas é obrigatório')
+        })
 
-      await schema.validate(data, {
-        abortEarly: false,
-      })
+        await schema.validate(data, {
+          abortEarly: false
+        })
 
-      createJob({
-        name: data.name,
-        dailyHours: data.dailyHours,
-        totalHours: data.totalHours
-      })
-    } catch (err) {
-      const errors = getValidationErrors(err)
-      formRef.current?.setErrors(errors)
-    }
-  }, [createJob])
+        createJob({
+          name: data.name,
+          dailyHours: data.dailyHours,
+          totalHours: data.totalHours
+        })
+      } catch (err) {
+        const errors = getValidationErrors(err)
+        formRef.current?.setErrors(errors)
+      }
+    },
+    [createJob]
+  )
 
   return (
     <body id="page-job">
@@ -129,17 +132,17 @@ export default function Job() {
         </aside>
       </div>
     </body>
-  );
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { token } = req.cookies;
+  const { token } = req.cookies
 
   if (!token) {
     return {
       redirect: {
         destination: '/login',
-        permanent: false,
+        permanent: false
       }
     }
   }

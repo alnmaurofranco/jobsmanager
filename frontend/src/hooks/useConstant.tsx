@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { ConstantContext } from '../contexts/ConstantContext';
+import { useContext } from 'react'
+import { ConstantContext } from '../contexts/ConstantContext'
 
 export function useConstant() {
   const context = useContext(ConstantContext)
