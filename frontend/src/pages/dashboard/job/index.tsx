@@ -4,12 +4,12 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { useConstant } from '../../../hooks/ConstantContext';
 
 import getValidationErrors from '../../../utils/getValidationErrors';
 import Header from "../../../components/Dashboard/Header";
 import Input from '../../../components/Input/index';
 import Layout from '../../../components/Layout/index';
+import { useConstant } from '../../../hooks/useConstant';
 
 interface IJobData {
   name: string;

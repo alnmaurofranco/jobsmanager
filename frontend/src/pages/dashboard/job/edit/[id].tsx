@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import Link from 'next/link'
 import * as Yup from 'yup';
 import { api } from '../../../../services/api';
-import { useConstant } from '../../../../hooks/ConstantContext';
 import { FormHandles } from '@unform/core';
 
 import Header from "../../../../components/Dashboard/Header";
@@ -12,6 +11,7 @@ import getValidationErrors from '../../../../utils/getValidationErrors';
 import { Form } from '@unform/web';
 import { useRouter } from 'next/router';
 import Layout from '../../../../components/Layout/index';
+import { useConstant } from '../../../../hooks/useConstant';
 
 interface IJob {
   id: number;

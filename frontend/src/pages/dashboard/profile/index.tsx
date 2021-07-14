@@ -6,11 +6,11 @@ import Header from "../../../components/Dashboard/Header";
 import { api } from '../../../services/api';
 import Input from '../../../components/Input/index';
 import { Form } from '@unform/web';
-import { useAuth } from '../../../hooks/AuthContext';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import getValidationErrors from '../../../utils/getValidationErrors';
 import Layout from '../../../components/Layout/index';
+import { useAuth } from '../../../hooks/useAuth';
 
 interface IUserProfile {
   id: string;

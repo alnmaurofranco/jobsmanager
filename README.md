@@ -6,12 +6,12 @@ Ultima atualização em: **03.05.2021**
 
 - [] PWA
 - [] Minified CSS
-- [] PAGE FORGOT PASSWORD 'feature/page-forgotpassword'
-  - [] SEND EMAIL
-  - [] RECIVE TOKEN
-- [] ACCEPT AUTHENTICATED WITH EMAIL VERIFIED 'feature/email-verified'
-  - [] ONLY VERIFIED E-MAIL EQUALS TRUE
-- [] CHANGE PASSWORD ACCOUNT 'feature/change-password'
+- [x] PAGE FORGOT PASSWORD 'feature/page-forgotpassword'
+  - [x] SEND EMAIL
+  - [x] RECIVE TOKEN
+- [x] ACCEPT AUTHENTICATED WITH EMAIL VERIFIED 'feature/email-verified'
+  - [x] ONLY VERIFIED E-MAIL EQUALS TRUE
+- [x] CHANGE PASSWORD ACCOUNT 'feature/change-password'
 - [x] API SECURITY 'feature/security-api'
   - [x] Rate Limiting
 - [x] DELETE PROFILE

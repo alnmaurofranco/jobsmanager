@@ -7,13 +7,13 @@ import { AiOutlineLock } from 'react-icons/ai'
 import { BsBoxArrowInRight } from 'react-icons/bs'
 import { IoPersonAddSharp, IoEyeOutline, IoEyeOffOutline, IoAt } from 'react-icons/io5'
 import { BsCheckCircle } from 'react-icons/bs'
-import { useAuth } from '../hooks/AuthContext'
 
 import Layout from "../components/Layout"
 import getValidationErrors from '../utils/getValidationErrors';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import withAuthLogged from '../components/withAuthLogged';
+import { useAuth } from '../hooks/useAuth';
 
 interface ISignInFormData {
   email: string;

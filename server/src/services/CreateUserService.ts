@@ -22,9 +22,7 @@ class CreateUserService {
     password,
     confirm_password,
   }: IRequest): Promise<User> {
-    const userAlready = await this.usersRepository.findOne({
-      where: { email },
-    });
+    const userAlready = await this.usersRepository.findByEmail(email);
 
     if (userAlready) {
       throw new HttpException(400, 'E-mail address already used');

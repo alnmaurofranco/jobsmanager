@@ -1,15 +1,15 @@
 import { FormEvent, useCallback, useState, useRef } from 'react';
+import Link from 'next/link';
+import * as Yup from 'yup';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
 import { IoAt, IoArrowBackOutline } from 'react-icons/io5';
 
 import Layout from "../components/Layout"
 import Input from '../components/Input/index';
-import { FormHandles } from '@unform/core';
-import { useAuth } from '../hooks/AuthContext';
-import * as Yup from 'yup';
 import getValidationErrors from '../utils/getValidationErrors';
-import { Form } from '@unform/web';
 import Button from '../components/Button/index';
-import Link from 'next/link';
+import { useAuth } from '../hooks/useAuth';
 
 const ForgotPassword: React.FC<{}> = () => {
   const formRef = useRef<FormHandles>(null)

@@ -6,11 +6,11 @@ import Button from '../../../components/Button/index';
 import getValidationErrors from '../../../utils/getValidationErrors';
 import * as Yup from 'yup';
 import { useCallback, useRef } from 'react';
-import { useAuth } from '../../../hooks/AuthContext';
 import { FormHandles } from '@unform/core';
 import { AiOutlineLock } from 'react-icons/ai';
 import Input from '../../../components/Input/index';
 import Layout from '../../../components/Layout/index';
+import { useAuth } from '../../../hooks/useAuth';
 
 interface IResetPassword {
   newPassword: string;
@@ -42,8 +42,7 @@ const ResetPassword: React.FC = ({ token }: any) => {
 
       resetPassword({
         token,
-        newPassword: data.newPassword,
-        confirmNewPassword: data.confirmNewPassword,
+        newPassword: data.newPassword
       })
     } catch (err) {
       const errors = getValidationErrors(err)

@@ -3,10 +3,10 @@ import Link from 'next/link'
 import { useState } from 'react';
 import { api } from '../../services/api'
 import { FiLogOut } from 'react-icons/fi'
-import { useAuth } from '../../hooks/AuthContext';
-import { useConstant } from '../../hooks/ConstantContext';
 import Image from 'next/image';
 import Layout from '../../components/Layout/index';
+import { useAuth } from '../../hooks/useAuth';
+import { useConstant } from '../../hooks/useConstant';
 
 interface IJobs {
   id: number;

@@ -20,10 +20,7 @@ class SignService {
   private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findOne({
-      where: { email },
-      relations: ['profile'],
-    });
+    const user = await this.usersRepository.findByEmail(email, true);
 
     if (!user) {
       throw new HttpException(400, 'Incorrect email/password combination.');

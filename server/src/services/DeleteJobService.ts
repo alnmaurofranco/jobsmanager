@@ -9,16 +9,16 @@ interface IRequest {
 }
 
 class DeleteJobService {
-  private ormRepository = getCustomRepository(JobRepository);
+  private jobRepository = getCustomRepository(JobRepository);
 
-  public async execute({ id, user_id }: IRequest): Promise<any> {
-    const job = await this.ormRepository.findById(id, user_id);
+  public async execute({ id, user_id }: IRequest): Promise<void> {
+    const job = await this.jobRepository.findById(id, user_id);
 
     if (!job) {
       throw new HttpException(400, 'You dont permission for delete this job');
     }
 
-    await this.ormRepository.remove(job);
+    await this.jobRepository.remove(job);
   }
 }
 
