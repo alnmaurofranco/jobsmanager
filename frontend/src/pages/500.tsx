@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '../components/Layout/index'
+import { useIdioms } from '../hooks/useIdioms';
 
 const Custom500: React.FC = () => {
+  const { locale, ptBR, enUS } = useIdioms()
+
   return (
     <>
       <Layout title="Internal Server Error" />
@@ -17,7 +20,7 @@ const Custom500: React.FC = () => {
           <div className="flex justify-center items-center mt-5">
             <Link href="/">
               <a className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-indigo-600 hover:bg-indigo-700 rounded py-4 w-56 transition duration-300 ease-in">
-                VOLTAR A HOME
+                {locale === 'pt-BR' ? ptBR.buttonCustomPage : enUS.buttonCustomPage}
               </a>
             </Link>
           </div>

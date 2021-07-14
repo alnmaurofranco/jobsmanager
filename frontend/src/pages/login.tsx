@@ -17,6 +17,7 @@ import Layout from '../components/Layout'
 import withAuthLogged from '../components/withAuthLogged'
 import { useAuth } from '../hooks/useAuth'
 import getValidationErrors from '../utils/getValidationErrors'
+import { useIdioms } from '../hooks/useIdioms';
 
 interface ISignInFormData {
   email: string
@@ -24,6 +25,8 @@ interface ISignInFormData {
 }
 
 const Login: React.FC = () => {
+  const { locale, ptBR, enUS } = useIdioms()
+
   const formRef = useRef<FormHandles>(null)
   const {
     showModal,
@@ -62,15 +65,15 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Layout title="Entrar" />
+      <Layout title={locale === 'pt-BR' ? ptBR.pageTitleLogin : enUS.pageTitleLogin} />
       <div className="bg-indigo-100 grid grid-cols-1 lg:grid-cols-2 ">
         <div className="bg-green-600 lg:min-h-screen lg:flex lg:items-center p-16 sm:p-20">
           <div className="flex-grow">
             <h1 className="text-white text-center text-2xl sm:text-5xl mb-2">
-              Bem-vindo ao JobsManager
+              {locale === 'pt-BR' ? ptBR.titleLogin : enUS.titleLogin}
             </h1>
             <p className="text-center text-green-200 sm:text-lg">
-              Faça seu login na plataforma.
+              {locale === 'pt-BR' ? ptBR.descriptionLogin : enUS.descriptionLogin}
             </p>
           </div>
         </div>
@@ -79,7 +82,7 @@ const Login: React.FC = () => {
           <div className="flex-grow bg-white shadow-xl rounded-md border border-gray-300 p-8">
             <div className="text-center">
               <p className="text-2xl font-medium text-gray-900">
-                FAÇA LOGIN NA SUA CONTA
+                {locale === 'pt-BR' ? ptBR.titleLoginForm : enUS.titleLoginForm}
               </p>
             </div>
 
@@ -121,7 +124,7 @@ const Login: React.FC = () => {
                     type={passwordShown === true ? 'text' : 'password'}
                     name="password"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
-                    placeholder="Senha"
+                    placeholder={locale === 'pt-BR' ? ptBR.inputLoginForm : enUS.inputLoginForm}
                   />
                 </div>
               </div>
@@ -129,7 +132,7 @@ const Login: React.FC = () => {
                 <div className="flex ml-auto">
                   <Link href="/forgot-password">
                     <a className="inline-flex text-xs sm:text-sm text-blue-500 hover:text-blue-700">
-                      Esqueceu a senha?
+                      {locale === 'pt-BR' ? ptBR.textLinkLogin : enUS.textLinkLogin}
                     </a>
                   </Link>
                 </div>
@@ -140,7 +143,7 @@ const Login: React.FC = () => {
                   type="submit"
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in"
                 >
-                  <span className="mr-2 uppercase">Entrar</span>
+                  <span className="mr-2 uppercase">{locale === 'pt-BR' ? ptBR.buttonLogin : enUS.buttonLogin}</span>
                   <span>
                     <BsBoxArrowInRight className="h-6 w-6" />
                   </span>
@@ -153,7 +156,7 @@ const Login: React.FC = () => {
                   <span>
                     <IoPersonAddSharp className="h-6 w-6" />
                   </span>
-                  <span className="ml-2">Não é um membro? Cadastre-se</span>
+                  <span className="ml-2">{locale === 'pt-BR' ? ptBR.isMember : enUS.isMember}</span>
                 </a>
               </Link>
             </div>

@@ -19,6 +19,7 @@ import Input from '../components/Input/index'
 import withAuthLogged from '../components/withAuthLogged'
 import Button from '../components/Button/index'
 import { useAuth } from '../hooks/useAuth'
+import { useIdioms } from '../hooks/useIdioms';
 
 interface ISignupData {
   name: string
@@ -29,6 +30,7 @@ interface ISignupData {
 }
 
 const Register: React.FC = () => {
+  const { locale, ptBR, enUS } = useIdioms()
   const formRef = useRef<FormHandles>(null)
   const {
     signup,
@@ -78,15 +80,15 @@ const Register: React.FC = () => {
 
   return (
     <>
-      <Layout title="Cadastre-se" />
+      <Layout title={locale === 'pt-BR' ? ptBR.pageTitleSignup : enUS.pageTitleSignup} />
       <div className="bg-indigo-100 grid grid-cols-1 lg:grid-cols-2 ">
         <div className="bg-green-600 lg:min-h-screen lg:flex lg:items-center p-16 sm:p-20">
           <div className="flex-grow">
             <h1 className="text-white text-center text-2xl sm:text-5xl mb-2">
-              Cadastre-se no JobsManager
+              {locale === 'pt-BR' ? ptBR.titleSignup : enUS.titleSignup}
             </h1>
             <p className="text-center text-green-200 sm:text-lg">
-              Faça agora mesmo seu cadastro na plataforma.
+              {locale === 'pt-BR' ? ptBR.descriptionSignup : enUS.descriptionSignup}
             </p>
           </div>
 
@@ -102,14 +104,9 @@ const Register: React.FC = () => {
         <div className="lg-min-h-screen lg:flex lg:items-center p-24 lg:p-24 sm:p-18 xl:p-12 2xl:p-48">
           <div className="flex-grow bg-white shadow-xl rounded-md border border-gray-300 p-8">
             <div className="text-center">
-              <p className="text-2xl font-medium text-gray-900">CADASTRO</p>
-              <div className="relative mt-10 h-px bg-gray-300">
-                <div className="absolute left-0 top-0 flex justify-center w-full -mt-2">
-                  <span className="bg-white px-4 text-xs text-gray-500 uppercase">
-                    Ou Cadastrar com Email
-                  </span>
-                </div>
-              </div>
+              <p className="text-2xl font-medium text-gray-900">
+                {locale === 'pt-BR' ? ptBR.titleSignupForm : enUS.titleSignupForm}
+              </p>
             </div>
 
             <Form className="mt-8" ref={formRef} onSubmit={handleRegister}>
@@ -123,7 +120,7 @@ const Register: React.FC = () => {
                     type="text"
                     name="name"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-60 py-2 focus-within:outline-none focus-within:border-green-500"
-                    placeholder="Nome"
+                    placeholder={locale === 'pt-BR' ? ptBR.inputNameSignupForm : enUS.inputNameSignupForm}
                   />
                 </div>
 
@@ -136,7 +133,7 @@ const Register: React.FC = () => {
                     type="text"
                     name="username"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-60 py-2 focus-within:outline-none focus-within:border-green-500"
-                    placeholder="Nome de usuário"
+                    placeholder={locale === 'pt-BR' ? ptBR.inputUsernameSignupForm : enUS.inputUsernameSignupForm}
                   />
                 </div>
               </div>
@@ -178,7 +175,7 @@ const Register: React.FC = () => {
                     type={passwordShown === true ? 'text' : 'password'}
                     name="password"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
-                    placeholder="Senha"
+                    placeholder={locale === 'pt-BR' ? ptBR.inputPasswordSignupForm : enUS.inputPasswordSignupForm}
                   />
                 </div>
               </div>
@@ -205,7 +202,7 @@ const Register: React.FC = () => {
                     type={confirmPasswordShown === true ? 'text' : 'password'}
                     name="confirmPassword"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
-                    placeholder="Digite a senha novamente..."
+                    placeholder={locale === 'pt-BR' ? ptBR.inputConfirmPasswordSignupForm : enUS.inputConfirmPasswordSignupForm}
                   />
                 </div>
               </div>
@@ -215,7 +212,9 @@ const Register: React.FC = () => {
                   type="submit"
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in"
                 >
-                  <span className="mr-2 uppercase">Cadastrar</span>
+                  <span className="mr-2 uppercase">
+                    {locale === 'pt-BR' ? ptBR.buttonSignup : enUS.buttonSignup}
+                  </span>
                 </Button>
               </div>
             </Form>
@@ -225,7 +224,7 @@ const Register: React.FC = () => {
                   <span>
                     <IoPersonCircleOutline className="h-6 w-6" />
                   </span>
-                  <span className="ml-2">Já é um membro? Entrar</span>
+                  <span className="ml-2">{locale === 'pt-BR' ? ptBR.textLinkSignup : enUS.textLinkSignup}</span>
                 </a>
               </Link>
             </div>

@@ -1,81 +1,45 @@
-## JobsManager
+<h1 align="center" style="font-weight: 600;">
+👨‍💻 JobsManager
+</h1>
+O JobsManager é uma plataforma de estimativa de cálculo para projetos freelancer, onde é possível cadastrar e excluir jobs (projetos), obtendo uma estimativa de custo de cada job. Além disso, é possível traçar o valor da hora da pessoa que estará usando o sistema
 
-Ultima atualização em: **03.05.2021**
+<br>
 
-## **FEATURES WEB/API**
+<!-- <h1 align="center">
+    <img alt="JobsManager" title="JobsManager" src=".github/jobsmanager@black.svg" width="220px" />
+</h1> -->
 
-- [x] PWA
-- [x] Minified CSS
-- [x] PAGE FORGOT PASSWORD 'feature/page-forgotpassword'
-  - [x] SEND EMAIL
-  - [x] RECIVE TOKEN
-- [x] ACCEPT AUTHENTICATED WITH EMAIL VERIFIED 'feature/email-verified'
-  - [x] ONLY VERIFIED E-MAIL EQUALS TRUE
-- [x] CHANGE PASSWORD ACCOUNT 'feature/change-password'
-- [x] API SECURITY 'feature/security-api'
-  - [x] Rate Limiting
-- [x] DELETE PROFILE
-- [x] API CACHE 'feature/cachedb'
-  - [x] USERS /users
-  - [x] JOBS /jobs
-  - [x] PROFILE
-- [] DEPLOY VERCEL FRONT-END
-- [] DEPLOY HEROKU BACK-END
+<br>
 
-## WEB
+<p align="center">
+  <img alt="JobsManager" src=".github/screen@jobsmanager.png" width="100%">
+</p>
 
-- [x] feature/change-stylesweb
+## 🚀 Tecnologias
+* Front-end
+  * Next.js
+  * Typescript
+  * TailwindCSS
+* Back-end
+  * Node.js
+  * Express.js
+  * Typescript
+  * PostgreSQL
 
-  - [x] LOGOTIPO 'JOBSMANAGER'
-  - [x] FAVICON
-  - [x] MUDAR AS CORES DO LAYOUT
+## 🎉 Funcionalidades
+* PWA - Progressive Web App
+* Autenticação completa com logar usuários
 
-- [x] PAGE LOGIN
-- [x] USER WITH AUTHENTICATION PERFORM NOT ACCESS /login
-- [x] AUTHENTICATED
-- [x] PAGE REGISTER
 
-- [x] FINISH LOGIC IN CONTEXT
-- [x] PAGE DASHBOARD
-- [x] PAGE PROFILE
-- [x] PAGE EDIT JOB
-- [x] PAGE CREATE JOB
-- [x] REVISÃO DO MODAL DASHBOARD
-- [x] REVISÃO DO MODAL NO LOGIN
-- [x] REVISÃO DO DASHBOARD HEADER
-- [x] REVISÃO DO USER EM USEAUTH()
+## 🤔 Como contribuir
 
-## API
+- Faça um fork desse repositório;
+- Cria uma branch com a sua feature: `git checkout -b minha-feature`;
+- Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
+- Faça push para a sua branch: `git push origin minha-feature`.
 
-- [x] ENDPOINT DASHBOARD
+Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
-### User Profile
+---
 
-- [x] SHOW
-- [x] UPDATE
-- [x] DELETE
-
-### Users
-
-- [x] INDEX
-- [x] CREATE
-- [x] SHOW
-- [x] UPDATE
-- [x] DELETE
-
-### Jobs
-
-- [x] INDEX
-- [x] CREATE
-- [x] SHOW
-- [x] UPDATE
-- [x] DELETE
-
-### Functions
-
-- [x] USER WITH TOKEN
-- [x] MIDDLEWARE TOKEN
-
-### Deploy
-
-- [x] BUILD TO JAVASCRIPT
+Feito com 💚 by AlanM Franco  [Visite meu Portfolio!](https://alnmaurofranco.github.io/)

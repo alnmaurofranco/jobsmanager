@@ -1,8 +1,11 @@
 import Layout from '../components/Layout/index'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useIdioms } from '../hooks/useIdioms';
 
 const Offline: React.FC = () => {
+  const { locale, ptBR, enUS } = useIdioms()
+
   return (
     <>
       <Layout title="Offline" />
@@ -19,12 +22,12 @@ const Offline: React.FC = () => {
             JobsManager Offline
           </h2>
           <div className="flex justify-center items-center mt-4 text-gray-600 text-lg">
-            No momento você está navegando sem acesso a internet no JobsManager.
+            {locale === 'pt-BR' ? ptBR.descriptionCustomPage : enUS.descriptionCustomPage}
           </div>
           <div className="flex justify-center items-center mt-4">
             <Link href="/">
               <a className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-indigo-600 hover:bg-indigo-700 rounded py-4 w-56 transition duration-300 ease-in">
-                VOLTAR
+                {locale === 'pt-BR' ? ptBR.buttonCustomPage : enUS.buttonCustomPage}
               </a>
             </Link>
           </div>

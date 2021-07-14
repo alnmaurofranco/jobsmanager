@@ -1,44 +1,12 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import Separator from '../components/Separator/index'
 import { useAuth } from '../hooks/useAuth'
+import { useIdioms } from '../hooks/useIdioms';
 
 const Home: React.FC = () => {
   const { user } = useAuth()
-  const router = useRouter()
-  const { locale } = router
-
-  const ptBR = {
-    text:
-      'O JobsManager é uma plataforma para gerenciar seus trabalhos durante o desenvolvimento.',
-    sign: 'Entrar',
-    signup: 'Cadastre-se',
-    p: 'Privacidade',
-    c: 'Cookies',
-    t: 'Termos e Condições'
-  }
-
-  const enUS = {
-    text:
-      'The JobsManager is a platform to manage your jobs during development.',
-    sign: 'Log in',
-    signup: 'Register',
-    p: 'Privacy',
-    c: 'Cookies',
-    t: 'Terms & Conditions'
-  }
-
-  const handleToggle = () => {
-    switch (locale) {
-      case 'pt-BR':
-        router.push('/', '/', { locale: 'en-US' })
-        break
-      case 'en-US':
-        router.push('/', '/', { locale: 'pt-BR' })
-        break
-    }
-  }
+  const { locale, handleToggle, ptBR, enUS } = useIdioms()
 
   return (
     <>
@@ -60,7 +28,7 @@ const Home: React.FC = () => {
               <>
                 <Link href="/dashboard">
                   <button className="relative bg-indigo-500 text-white p-6 rounded-xl text-xl w-80 font-bold overflow-visible hover:bg-indigo-600 focus:outline-none flex items-center justify-center gap-2">
-                    Dashboard
+                    {locale === 'pt-BR' ? ptBR.dashboard : enUS.dashboard}
                   </button>
                 </Link>
               </>
@@ -120,7 +88,7 @@ const Home: React.FC = () => {
               </li>
             </ul>
             <div className="flex mx-auto text-white text-center mt-2">
-              JobsManager © 2021. Made with 💚 by AlanM Franco
+              {locale === 'pt-BR' ? ptBR.copyright : enUS.copyright}
             </div>
           </div>
         </footer>

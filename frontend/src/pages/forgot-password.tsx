@@ -9,8 +9,10 @@ import Input from '../components/Input/index'
 import Layout from '../components/Layout'
 import { useAuth } from '../hooks/useAuth'
 import getValidationErrors from '../utils/getValidationErrors'
+import { useIdioms } from '../hooks/useIdioms';
 
 const ForgotPassword: React.FC = () => {
+  const { locale, ptBR, enUS } = useIdioms()
   const formRef = useRef<FormHandles>(null)
   const { forgotPassword } = useAuth()
 
@@ -40,15 +42,15 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <>
-      <Layout title="Recuperação da conta" />
+      <Layout title={locale === 'pt-BR' ? ptBR.pageTitleForgot : enUS.pageTitleForgot} />
       <div className="bg-indigo-100 grid grid-cols-1 lg:grid-cols-2 ">
         <div className="bg-green-600 lg:min-h-screen lg:flex lg:items-center p-16 sm:p-20">
           <div className="flex-grow">
             <h1 className="text-white text-center text-2xl sm:text-5xl mb-2">
-              Recuperação da conta
+              {locale === 'pt-BR' ? ptBR.titleForgot : enUS.titleForgot}
             </h1>
             <p className="text-center text-green-200 sm:text-lg">
-              Insira seu email para procurar sua conta.
+              {locale === 'pt-BR' ? ptBR.descriptionForgot : enUS.descriptionForgot}
             </p>
           </div>
 
@@ -65,7 +67,7 @@ const ForgotPassword: React.FC = () => {
           <div className="flex-grow bg-white shadow-xl rounded-md border border-gray-300 p-8">
             <div className="text-center">
               <p className="text-2xl font-medium text-gray-900">
-                Encontre sua conta
+                {locale === 'pt-BR' ? ptBR.titleForgotForm : enUS.titleForgotForm}
               </p>
             </div>
 
@@ -94,7 +96,7 @@ const ForgotPassword: React.FC = () => {
                   type="submit"
                   className="flex items-center justify-center focus:outline-none text-white text-sm sm:text-base bg-green-600 hover:bg-green-700 rounded py-4 w-full transition duration-150 ease-in"
                 >
-                  <span className="mr-2 uppercase">Continuar</span>
+                  <span className="mr-2 uppercase">{locale === 'pt-BR' ? ptBR.buttonForgotForm : enUS.buttonForgotForm}</span>
                 </Button>
               </div>
             </Form>
