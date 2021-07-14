@@ -5,7 +5,7 @@ Ultima atualização em: **03.05.2021**
 ## **FEATURES WEB/API**
 
 - [x] PWA
-- [] Minified CSS
+- [x] Minified CSS
 - [x] PAGE FORGOT PASSWORD 'feature/page-forgotpassword'
   - [x] SEND EMAIL
   - [x] RECIVE TOKEN
