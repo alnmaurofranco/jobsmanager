@@ -12,10 +12,11 @@ module.exports = withPWA({
       // video: ...,
     },
     //disable: process.env.NODE_ENV === 'development',
+    //scope: '/',
     // register: true,
-    // scope: '/app',
     // sw: 'service-worker.js',
-    //...
+    dynamicStartUrl: false,
+    dynamicStartUrlRedirect: '/login'
   },
   i18n: {
     locales: ['pt-BR','en-US'],

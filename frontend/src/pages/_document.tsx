@@ -10,17 +10,19 @@ class MyDocument extends Document {
     return (
       <Html lang="pt-BR">
         <Head>
-          <meta name="description" content="JobsManager" />
-          <meta name="keywords" content="Cálcule o seu valor para cobrar em seus futuros jobs na plataforma" />
-          <meta name="application-name" content="JobsManager" />
+          <meta name="description" content="Cálcule o seu valor para cobrar em seus futuros jobs na plataforma" />
+          <meta name="keywords" content="Jobs, trabalhos, freelancer, freelas, desenvolvimento" />
+          <meta name="application-name" content="PWA JobsManager" />
+
           <meta name="apple-mobile-web-app-title" content="JobsManager" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
           <meta name="mobile-web-app-capable" content="yes" />
+
           <meta name="msapplication-navbutton-color" content="#064E3B" />
           <meta name="msapplication-TileColor" content="#fff" />
           <meta name="msapplication-TileImage" content="/images/icons/ms-icon-144x144.png" />
-          <meta name="msapplication-config" content="/images/browserconfig.xml" />
+          <meta name="msapplication-config" content="/images/icons/browserconfig.xml" />
           <meta name="theme-color" content="#fff" />
 
           <link rel="apple-touch-icon" href="/images/icons/apple-icon.png" />
@@ -32,11 +34,11 @@ class MyDocument extends Document {
           <link rel="icon" sizes="192x192" href="/images/icons/android-icon-192x192.png" />
           <link rel="icon" sizes="144x144" href="/images/icons/android-icon-144x144.png" />
 
-          <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
-          <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png" />
+          <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png" />
           <link rel="shortcut icon" href="/images/favicon.ico" />
-          <link rel="mask-icon" color="#5bbad5" href="/images/safari-pinned-tab.svg" />
+          <link rel="mask-icon" color="#5bbad5" href="/images/icons/safari-pinned-tab.svg" />
           <link rel="manifest" href="/manifest.json" />
 
           <meta property="og:url" content="https://localhost:3000/" />
