@@ -49,18 +49,20 @@ interface IUserProfileData {
   name?: string;
   avatar?: string;
   email?: string;
-  old_password?: string;
-  password?: string;
   monthlyBudget?: number;
   hoursPerDay?: number;
   daysPerWeek?: number;
   vacationPerYear?: number;
 }
 
+interface IUserProfileChangePasswordData {
+  oldPassword: string;
+  newPassword: string;
+}
+
 interface IResetPasswordData {
   token: string;
   newPassword: string;
-  confirmNewPassword: string;
 }
 
 interface IAuthContextState {
@@ -76,6 +78,7 @@ interface IAuthContextState {
   passwordShown: boolean;
   confirmPasswordShown: boolean;
   updateProfile: (data: IUserProfileData) => void;
+  updateProfilePassword: (data: IUserProfileChangePasswordData) => void;
   desactiveProfile: () => void;
   user: IUser;
 }
@@ -204,12 +207,21 @@ export const AuthProvider: React.FC = ({ children }) => {
     }
   }, [])
 
-  const resetPassword = useCallback(async ({ token, newPassword, confirmNewPassword }: IResetPasswordData) => {
+  const resetPassword = useCallback(async ({ token, newPassword }: IResetPasswordData) => {
     try {
       const response = await api.post('/password/reset', {
-        token, newPassword, confirmNewPassword
+        token, newPassword
       })
 
+      MySwal.fire({
+        title: 'Redefinição de senha',
+        text: 'A troca de senha foi realizada com sucesso.',
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1600
+      })
+
+      router.push('/login')
     } catch (error) {
       error.response ?
         MySwal.fire({
@@ -223,6 +235,39 @@ export const AuthProvider: React.FC = ({ children }) => {
   const togglePasswordVisiblity = () => setPasswordShown(!passwordShown);
 
   const toggleConfirmPasswordVisiblity = () => setConfirmPasswordShown(!confirmPasswordShown)
+
+  const updateProfilePassword = useCallback(async ({ oldPassword, newPassword }: IUserProfileChangePasswordData) => {
+    try {
+      const token = Cookie.get('token')
+
+      const response = await api.put('profile/update/password', {
+        oldPassword, newPassword
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      MySwal.fire({
+        title: 'Senha atualizada',
+        text: response.data,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1100
+      })
+
+      Cookie.remove('token')
+      localStorage.removeItem('@JobsManager:user')
+      router.push('/login')
+    } catch (error) {
+      error.response ?
+        MySwal.fire({
+          title: 'Ops!',
+          text: error.response.data,
+          icon: "error",
+        }) : router.push('500')
+    }
+  }, [])
 
   const updateProfile = useCallback(async ({ name, avatar, email, username, monthlyBudget, hoursPerDay, daysPerWeek, vacationPerYear }: IUserProfileData) => {
     try {
@@ -320,20 +365,11 @@ export const AuthProvider: React.FC = ({ children }) => {
       confirmPasswordShown,
       updateProfile,
       desactiveProfile,
+      updateProfilePassword,
       user: data.user
     }}
     >
       {children}
     </AuthContext.Provider>
   )
-}
-
-export function useAuth(): IAuthContextState {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
-  }
-
-  return context
 }

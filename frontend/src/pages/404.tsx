@@ -10,7 +10,7 @@ export default function Custom404() {
         <main className="flex-1 lg:container px-4 py-6 mx-auto md:px-6 md:py-12">
           <div className="flex flex-col items-center justify-center space-y-12">
             <Image
-              src="/404.svg"
+              src="/images/404.svg"
               height={440}
               width={800}
             />

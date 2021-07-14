@@ -22,7 +22,7 @@ class UpdateUserService {
     old_password,
     password,
   }: IRequest): Promise<User> {
-    const user = await this.usersRepository.findById(id);
+    const user = await this.usersRepository.findUserById(id);
 
     if (!user) {
       throw new HttpException(400, 'not found user with id');

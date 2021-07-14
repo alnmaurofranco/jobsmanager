@@ -13,7 +13,7 @@ const Email: React.FC = () => {
       <div className="header w-full min-h-screen flex flex-col justify-between">
         <div className="flex flex-col items-center justify-center h-full py-12">
           <Image
-            src="/confirmed.svg"
+            src="/images/confirmed.svg"
             alt="Verificação"
             height={320}
             width={400}

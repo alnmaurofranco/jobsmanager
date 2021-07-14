@@ -2,8 +2,7 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import Separator from '../components/Separator/index'
 import { useRouter } from 'next/router'
-import { useAuth } from '../hooks/AuthContext';
-import { AiOutlineDashboard } from "react-icons/ai";
+import { useAuth } from '../hooks/useAuth';
 
 export default function Home() {
   const { user } = useAuth()

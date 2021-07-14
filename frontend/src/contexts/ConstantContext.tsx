@@ -110,13 +110,3 @@ export const ConstantProvider: React.FC = ({ children }) => {
     </ConstantContext.Provider>
   )
 }
-
-export function useConstant(): IConstantContextState {
-  const context = useContext(ConstantContext)
-
-  if (!context) {
-    throw new Error('useConstant must be used within an ConstantProvider')
-  }
-
-  return context
-}

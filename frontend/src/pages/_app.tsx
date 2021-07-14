@@ -10,8 +10,8 @@ import '../../public/styles/partials/forms.css'
 import '../../public/styles/partials/animations.css'
 import '../../public/styles/partials/modal.css'
 
-import { AuthProvider } from '../hooks/AuthContext'
-import { ConstantProvider } from '../hooks/ConstantContext';
+import { AuthProvider } from '../contexts/AuthContext'
+import { ConstantProvider } from '../contexts/ConstantContext';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -8,10 +8,10 @@ interface IRequest {
 }
 
 class DesativedProfileService {
-  private ormRepository = getCustomRepository(UserRepository);
+  private userRepository = getCustomRepository(UserRepository);
 
   public async execute({ user_id }: IRequest): Promise<User> {
-    const user = await this.ormRepository.findUserById(user_id);
+    const user = await this.userRepository.findUserById(user_id);
 
     if (!user) {
       throw new HttpException(400, 'User not found in system.');
@@ -20,7 +20,7 @@ class DesativedProfileService {
     user.active = false;
     user.updated_at = new Date(Date.now());
 
-    return await this.ormRepository.save(user);
+    return await this.userRepository.save(user);
   }
 }
 

@@ -5,13 +5,13 @@ import { AiOutlineLock } from 'react-icons/ai'
 import { IoEyeOutline, IoEyeOffOutline, IoAt, IoPersonCircleOutline, IoTextSharp, IoArrowBackOutline } from 'react-icons/io5';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { useAuth } from '../hooks/AuthContext';
 
 import getValidationErrors from '../utils/getValidationErrors';
 import Layout from "../components/Layout"
 import Input from '../components/Input/index';
 import withAuthLogged from '../components/withAuthLogged';
 import Button from '../components/Button/index';
+import { useAuth } from '../hooks/useAuth';
 
 interface ISignupData {
   name: string;

@@ -3,7 +3,6 @@ import { UserProfileRepository } from '@database/repositories/UserProfileReposit
 import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import { calculateValueHour } from '@utils/JobUtils';
-import { compare, hash } from 'bcryptjs';
 import { getCustomRepository } from 'typeorm';
 import RedisCache from '../implementations/RedisCache';
 
@@ -13,8 +12,6 @@ interface IRequest {
   name?: string;
   avatar?: string;
   email?: string;
-  old_password?: string;
-  password?: string;
   monthly_budget?: number;
   days_per_week?: number;
   hours_per_day?: number;
@@ -32,8 +29,6 @@ class UpdateProfileService {
     name,
     avatar,
     email,
-    old_password,
-    password,
     monthly_budget,
     days_per_week,
     hours_per_day,
@@ -53,23 +48,6 @@ class UpdateProfileService {
 
     user.username = username;
     user.email = email;
-
-    if (password && !old_password) {
-      throw new HttpException(
-        400,
-        'You need to inform the old password to set a new password'
-      );
-    }
-
-    if (password && old_password) {
-      const checkOldPassword = await compare(old_password, password);
-
-      if (checkOldPassword) {
-        throw new HttpException(400, 'Old password does not match.');
-      }
-
-      user.password = await hash(password, 8);
-    }
 
     await this.usersRepository.save(user);
 

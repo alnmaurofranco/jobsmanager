@@ -8,16 +8,16 @@ interface IRequest {
 }
 
 class DeleteUserService {
-  private ormRepository = getCustomRepository(UserRepository);
+  private userRepository = getCustomRepository(UserRepository);
 
   public async execute({ id }: IRequest): Promise<User> {
-    const user = await this.ormRepository.findById(id);
+    const user = await this.userRepository.findUserById(id);
 
     if (!user) {
       throw new HttpException(400, 'not found user with id');
     }
 
-    return await this.ormRepository.remove(user);
+    return await this.userRepository.remove(user);
   }
 }
 

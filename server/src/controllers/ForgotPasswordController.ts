@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import SendForgotPasswordService from '@services/SendForgotPasswordService';
+import ResetPasswordService from '../services/ResetPasswordService';
 
 class ForgotPasswordController {
   public async create(req: Request, res: Response) {
@@ -23,15 +24,16 @@ class ForgotPasswordController {
   // }
 
   public async update(req: Request, res: Response) {
-    const { token, newPassword, confirmNewPassword } = req.body;
+    const { token, newPassword } = req.body;
 
-    const data = {
+    const resetPasswordService = new ResetPasswordService();
+
+    const resetPassword = await resetPasswordService.execute({
       token,
       newPassword,
-      confirmNewPassword,
-    };
+    });
 
-    return res.status(200).json({ data });
+    return res.status(200).json(resetPassword);
   }
 }
 

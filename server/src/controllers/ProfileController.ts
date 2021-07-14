@@ -3,6 +3,7 @@ import { classToClass } from 'class-transformer';
 import ShowProfileService from '@services/ShowProfileService';
 import UpdateProfileService from '@services/UpdateProfileService';
 import DesativedProfileService from '@services/DesativedProfileService';
+import UpdateUserPasswordService from '../services/UpdateUserPasswordService';
 
 class ProfileController {
   public async show(req: Request, res: Response) {
@@ -57,6 +58,23 @@ class ProfileController {
     const profile = await desativedProfileService.execute({ user_id });
 
     return res.status(204).json(profile);
+  }
+
+  public async updateToChangePassword(req: Request, res: Response) {
+    const { id: user_id } = req.user;
+    const { oldPassword, newPassword } = req.body;
+
+    console.log(`id: ${user_id} antiga: ${oldPassword} nova: ${newPassword}`);
+
+    const updateUserPasswordService = new UpdateUserPasswordService();
+
+    const updateUserPassword = await updateUserPasswordService.execute({
+      user_id,
+      oldPassword,
+      newPassword,
+    });
+
+    return res.status(200).json(updateUserPassword);
   }
 }
 
