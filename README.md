@@ -27,8 +27,9 @@ O JobsManager é uma plataforma de estimativa de cálculo para projetos freelanc
   * PostgreSQL
 
 ## 🎉 Funcionalidades
-* PWA - Progressive Web App
-* Autenticação completa com logar usuários
+* PWA - Progressive Web App ✅
+* Autenticação com JWT protegido com completa com logar  usuários ✅
+* 60% em Multi-linguagem ✅
 
 
 ## 🤔 Como contribuir

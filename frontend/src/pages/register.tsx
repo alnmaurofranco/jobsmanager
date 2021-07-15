@@ -148,7 +148,7 @@ const Register: React.FC = () => {
                     type="email"
                     name="email"
                     className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-md border border-gray-400 w-full py-2 focus-within:outline-none focus-within:border-green-500"
-                    placeholder="E-mail"
+                    placeholder="Seu e-mail"
                   />
                 </div>
               </div>
@@ -206,6 +206,8 @@ const Register: React.FC = () => {
                   />
                 </div>
               </div>
+
+              <p>Ao se registrar, você aceita nossos termos de uso e a nossa política de privacidade.</p>
 
               <div className="flex w-full">
                 <Button
