@@ -3,7 +3,7 @@ import auth from './auth';
 import cors from './cors';
 import cache from './cache';
 
-const { NODE_PORT, NODE_URL } = process.env;
+const { NODE_URL } = process.env;
 
 interface IServer {
   port: number;
@@ -11,7 +11,7 @@ interface IServer {
 }
 
 const server = {
-  port: parseInt(NODE_PORT as string, 10) || 4000,
+  port: parseInt(process.env.PORT as string, 10) || 4000,
   baseURL: NODE_URL,
 } as IServer;
 

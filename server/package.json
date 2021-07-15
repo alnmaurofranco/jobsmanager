@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "NODE_ENV=development ts-node-dev --inspect -r tsconfig-paths/register --respawn --transpile-only src/index.ts",
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "build": "rimraf dist && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "prod": "yarn build && yarn start",
     "start": "NODE_ENV=production node dist/index.js",
     "typeorm": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
@@ -36,6 +36,7 @@
     "rate-limiter-flexible": "^2.2.1",
     "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
     "typeorm": "^0.2.32",
     "uuid": "^8.3.2"
   },

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prod": "yarn build && yarn start"
   },
   "dependencies": {
     "@unform/core": "^2.1.6",

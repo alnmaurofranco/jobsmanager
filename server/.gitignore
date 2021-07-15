@@ -115,7 +115,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-\\//.env.development
-\\//.env.production
+.env.development
+.env.production
 
-middlewares/apiKey.ts
+src/middlewares/apiKey.ts

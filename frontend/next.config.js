@@ -2,6 +2,9 @@
 const withPWA = require('next-pwa')
 
 module.exports = withPWA({
+  env: {
+    apiURLHost: 'heroku', // local or heroku
+  },
   webpack5: true,
   pwa: {
     dest: 'public',

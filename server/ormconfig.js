@@ -19,7 +19,13 @@ module.exports = process.env.NODE_ENV === 'production' ? {
   cli: {
     "entitiesDir": "src/database/entities",
     "migrationsDir": "src/database/migrations"
-  }
+  },
+  // ssl: true,
+  // extra: {
+  //   ssl: {
+  //     rejectUnauthorized: false
+  //   }
+  // }
 } : {
   type: "postgres",
   host: process.env.DATABASE_HOST,

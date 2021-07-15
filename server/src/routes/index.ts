@@ -10,7 +10,7 @@ import passwordRoutes from './password.routes';
 const routesapi = Router();
 
 routesapi.get('/', (req: Request, res: Response) => {
-  return res.json({ message: 'Welcome to Generator NodeJS API' });
+  return res.json({ message: 'API REST - JobsManager 2021' });
 });
 
 routesapi.use('/session', sessionRoutes);
