@@ -10,6 +10,7 @@ import Layout from '../components/Layout'
 import { useAuth } from '../hooks/useAuth'
 import getValidationErrors from '../utils/getValidationErrors'
 import { useIdioms } from '../hooks/useIdioms';
+import withAuthLogged from '../components/withAuthLogged';
 
 const ForgotPassword: React.FC = () => {
   const { locale, ptBR, enUS } = useIdioms()
@@ -107,4 +108,4 @@ const ForgotPassword: React.FC = () => {
   )
 }
 
-export default ForgotPassword
+export default withAuthLogged(ForgotPassword)

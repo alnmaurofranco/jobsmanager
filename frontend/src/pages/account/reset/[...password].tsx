@@ -15,6 +15,7 @@ import { AiOutlineLock } from 'react-icons/ai'
 import Input from '../../../components/Input/index'
 import Layout from '../../../components/Layout/index'
 import { useAuth } from '../../../hooks/useAuth'
+import withAuthLogged from '../../../components/withAuthLogged'
 
 interface IResetPassword {
   newPassword: string
@@ -162,7 +163,7 @@ const ResetPassword: React.FC = ({ token }: never) => {
   )
 }
 
-export default ResetPassword
+export default withAuthLogged(ResetPassword)
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { token } = ctx.query

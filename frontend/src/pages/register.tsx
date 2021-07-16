@@ -205,9 +205,10 @@ const Register: React.FC = () => {
                     placeholder={locale === 'pt-BR' ? ptBR.inputConfirmPasswordSignupForm : enUS.inputConfirmPasswordSignupForm}
                   />
                 </div>
+                <p className="text-base text-gray-500 text-center">
+                  Ao se cadastrar, você aceita nossos termos de uso e a nossa política de privacidade.
+                </p>
               </div>
-
-              <p>Ao se registrar, você aceita nossos termos de uso e a nossa política de privacidade.</p>
 
               <div className="flex w-full">
                 <Button

@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState } from 'react';
 import { api } from '../../services/api'
 import { FiLogOut } from 'react-icons/fi'
-import Image from 'next/image'
 import Layout from '../../components/Layout/index'
 import { useAuth } from '../../hooks/useAuth'
 import { useConstant } from '../../hooks/useConstant'
@@ -12,40 +11,28 @@ import { useConstant } from '../../hooks/useConstant'
 interface IJobs {
   id: number
   name: string
-  daily_hours: number
-  total_hours: number
   remaining: number
   status: string
   budget: number
 }
 
-interface IProfile {
-  name: string
-  avatar: string
-  monthly_budget: number
-  days_per_day: number
-  hours_per_day: number
-  vacation_per_year: number
-  value_hour: number
-}
-
-interface IDashboardData {
-  jobs: IJobs[]
-  statusCount: {
-    progress: number
-    done: number
-    total: number
-  }
+interface IJobsOtherData {
+  progress: number
+  done: number
+  total: number
   freeHours: number
-  profile: IProfile
 }
 
-export default function Dashboard({ data }) {
+interface IDashboardProps {
+  jobs: IJobs[]
+  jobsOther: IJobsOtherData
+}
+
+export default function Dashboard({ jobs, jobsOther }: IDashboardProps) {
   const { signOut, user } = useAuth()
   const { deleteJob } = useConstant()
   const [modal, setModal] = useState(false)
   const [joob, setJoob] = useState(0)
-  const dashData: IDashboardData = data
 
   return (
     <div id="page-index">
@@ -60,30 +47,33 @@ export default function Dashboard({ data }) {
             <img id="logo" src="/images/logo.svg" alt="Logo" />
             <span id="notification">
               <img src="/images/alert-octagon.svg" alt="Alerta" />
-              {dashData.freeHours <= 0 ? (
+              {jobsOther && jobsOther.freeHours <= 0 ? (
                 <p>Você não tem horas livres.</p>
               ) : (
-                <p>Você tem {dashData.freeHours} horas livres no seu dia</p>
+                <p>Você tem {jobsOther && jobsOther.freeHours} horas livres no seu dia</p>
               )}
             </span>
 
             <Link href="/dashboard/profile">
               <a id="avatar-profile">
-                <p>
-                  {user?.profile.name} <span>Ver perfil</span>
-                </p>
-                <Image
-                  width={180}
-                  height={180}
-                  src={`
-                  ${user?.profile.avatar
-                      ? user?.profile.avatar
-                      : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`
-                    }`}
-                  alt={user?.profile.name}
-                  className="profile-avatar"
-                  objectFit="cover"
-                />
+                {process.browser && (
+                  <>
+                    <p>
+                      {user?.profile.name} <span>Ver perfil</span>
+                    </p>
+                    <img
+                      src={`${user?.profile.avatar
+                        ? user?.profile.avatar
+                        : `https://ui-avatars.com/api/?name=${user?.profile.name}&size=180&background=random`
+                        }`}
+                      alt={user?.profile.name}
+                      className="profile-avatar"
+                      width={180}
+                      height={180}
+                      style={{ objectFit: 'cover' }}
+                    />
+                  </>
+                )}
               </a>
             </Link>
 
@@ -108,15 +98,15 @@ export default function Dashboard({ data }) {
 
             <div className="info">
               <div className="total">
-                <strong>{dashData && dashData.statusCount.total}</strong>
+                <strong>{jobsOther && jobsOther.total}</strong>
                 Projetos ao total
               </div>
               <div className="in-progress">
-                <strong>{dashData && dashData.statusCount.progress}</strong>
+                <strong>{jobsOther && jobsOther.progress}</strong>
                 Em andamento
               </div>
               <div className="finished">
-                <strong>{dashData && dashData.statusCount.done}</strong>
+                <strong>{jobsOther && jobsOther.done}</strong>
                 Encerrados
               </div>
             </div>
@@ -137,7 +127,7 @@ export default function Dashboard({ data }) {
           <h1 className="sr-only">Trabalhos</h1>
 
           <div className="cards">
-            {dashData.jobs.length === 0 ? (
+            {jobs && jobs.length === 0 ? (
               <div>
                 <div className="card progress flex items-center justify-items-center">
                   <h1 className="text-xl 2xl:text-2xl text-center">
@@ -152,7 +142,7 @@ export default function Dashboard({ data }) {
                 />
               </div>
             ) : (
-              dashData?.jobs.map(job => (
+              jobs.map(job => (
                 <div className={`card ${job.status}`} key={job.id}>
                   <div className="id column">{job.id}</div>
                   <div className="name column">{job.name}</div>
@@ -251,17 +241,33 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   }
 
   try {
-    const res = await api.get('/dashboard', {
+    const { data } = await api.get('/dashboard', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
 
-    const data: IDashboardData = res.data
+    const jobs = data.jobs.map((job: IJobs) => {
+      return {
+        id: job.id,
+        name: job.name,
+        remaining: job.remaining,
+        status: job.status,
+        budget: job.budget
+      }
+    })
+
+    const jobsOther: IJobsOtherData = {
+      progress: data.statusCount.progress,
+      done: data.statusCount.done,
+      total: data.statusCount.total,
+      freeHours: data.freeHours
+    }
 
     return {
       props: {
-        data
+        jobs,
+        jobsOther
       }
     }
   } catch (error) {
