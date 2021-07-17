@@ -131,7 +131,7 @@ export default function Dashboard({ jobs, jobsOther }: IDashboardProps) {
               <div>
                 <div className="card progress flex items-center justify-items-center">
                   <h1 className="text-xl 2xl:text-2xl text-center">
-                    No momento você não possui nenhum trabalho ativo.
+                    No momento você não possui nenhum projeto em andamento.
                   </h1>
                 </div>
                 <img

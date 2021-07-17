@@ -5,13 +5,13 @@ Fazer um check-list para as futuras adições de funcionalidades, implementaçõ
 
 ## 🛠 TECNOLOGIAS
 
+- React
 - Next.js
 - ContextAPI
 - ESLint
 - Prettier
 - TailwindCSS
 - Axios
-- PWA
 
 ## ✔ PAGINAS CONCLUIDAS
 

@@ -1,4 +1,4 @@
-<h1 align="center" style="font-weight: 600;">
+<h1 align="center" style="font-weight: 600; font-size: 36px">
 👨‍💻 JobsManager
 </h1>
 O JobsManager é uma plataforma de estimativa de cálculo para projetos freelancer, onde é possível cadastrar e excluir jobs (projetos), obtendo uma estimativa de custo de cada job. Além disso, é possível traçar o valor da hora da pessoa que estará usando o sistema
@@ -6,7 +6,7 @@ O JobsManager é uma plataforma de estimativa de cálculo para projetos freelanc
 <br>
 
 <!-- <h1 align="center">
-    <img alt="JobsManager" title="JobsManager" src=".github/jobsmanager@black.svg" width="220px" />
+    <img alt="JobsManager" title="JobsManager" src=".github/jobsmanager@black.png" width="220px" />
 </h1> -->
 
 <br>
@@ -16,20 +16,19 @@ O JobsManager é uma plataforma de estimativa de cálculo para projetos freelanc
 </p>
 
 ## 🚀 Tecnologias
-* Front-end
-  * Next.js
-  * Typescript
-  * TailwindCSS
-* Back-end
-  * Node.js
-  * Express.js
-  * Typescript
-  * PostgreSQL
+Esse projeto foi desenvolvido com as seguintes tecnologias:
+
+* React
+* Next.js
+* Typescript
+* Node.js
+* Express.js
+* PostgreSQL
 
 ## 🎉 Funcionalidades
 * PWA - Progressive Web App ✅
 * Autenticação com JWT protegido com completa com logar  usuários ✅
-* 60% em Multi-linguagem ✅
+* Tradução 🇺🇸 e 🇧🇷 com i18n integrado no NextJS e feito 60% da tradução ✅
 
 
 ## 🤔 Como contribuir
