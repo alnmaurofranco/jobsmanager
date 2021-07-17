@@ -1,8 +1,8 @@
-import User from '@database/entities/User';
 import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import { getCustomRepository } from 'typeorm';
 import RedisCache from '../implementations/RedisCache';
+import User from '@database/entities/User';
 
 interface IRequest {
   user_id: string;
@@ -18,10 +18,27 @@ class ShowProfileService {
     );
 
     if (!user) {
-      user = await this.usersRepository.findOne({
-        where: { id: user_id },
-        relations: ['profile'],
-      });
+      user = await this.usersRepository
+        .createQueryBuilder('user')
+        .innerJoinAndSelect('user.profile', 'profile')
+        .select([
+          'user.id',
+          'user.username',
+          'user.email',
+          'user.active',
+          'user.email_verification',
+          'profile.name',
+          'profile.avatar',
+          'profile.monthly_budget',
+          'profile.days_per_week',
+          'profile.hours_per_day',
+          'profile.vacation_per_year',
+          'profile.value_hour',
+          'user.created_at',
+          'user.updated_at',
+        ])
+        .where('user.id = :id', { id: user_id })
+        .getOne();
 
       if (!user) {
         throw new HttpException(404, 'user not found!');
