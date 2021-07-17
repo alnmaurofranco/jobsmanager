@@ -1,6 +1,6 @@
-<h1 align="center" style="font-weight: 600; font-size: 36px">
-👨‍💻 JobsManager
-</h1>
+<p align="center">
+  <img alt="JobsManager" title="JobsManager" src=".github/logo.png" width="360px" />
+</p>
 O JobsManager é uma plataforma de estimativa de cálculo para projetos freelancer, onde é possível cadastrar e excluir jobs (projetos), obtendo uma estimativa de custo de cada job. Além disso, é possível traçar o valor da hora da pessoa que estará usando o sistema
 
 <br>
@@ -13,7 +13,10 @@ O JobsManager é uma plataforma de estimativa de cálculo para projetos freelanc
 
 <p align="center">
   <img alt="JobsManager" src=".github/screen@jobsmanager.png" width="100%">
+  <img alt="JobsManager" src=".github/screen-2@jobsmanager.png" width="100%">
 </p>
+
+<br>
 
 ## 🚀 Tecnologias
 Esse projeto foi desenvolvido com as seguintes tecnologias:
