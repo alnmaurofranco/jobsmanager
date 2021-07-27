@@ -13,6 +13,7 @@ interface IRequest {
 
 class CreateJobService {
   private jobsRepository = getCustomRepository(JobRepository);
+
   private cacheProvider = new RedisCache();
 
   public async execute({

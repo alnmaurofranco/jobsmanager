@@ -1,5 +1,4 @@
 import { getCustomRepository } from 'typeorm';
-import Job from '@database/entities/Job';
 import HttpException from '@errors/httpException';
 import { JobRepository } from '@database/repositories/JobRepository';
 

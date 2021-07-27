@@ -17,7 +17,9 @@ class DeleteUserService {
       throw new HttpException(400, 'not found user with id');
     }
 
-    return await this.userRepository.remove(user);
+    await this.userRepository.remove(user);
+
+    return user;
   }
 }
 

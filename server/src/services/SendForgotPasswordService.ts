@@ -2,8 +2,8 @@ import { getCustomRepository } from 'typeorm';
 import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import { UserTokenRepository } from '@database/repositories/UserTokenRepository';
-import MailProvider from '../providers/MailProvider';
 import path from 'path';
+import MailProvider from '../providers/MailProvider';
 
 interface IRequest {
   email: string;
@@ -12,7 +12,9 @@ interface IRequest {
 
 class SendForgotPasswordService {
   private userRepository = getCustomRepository(UserRepository);
+
   private userTokenRepository = getCustomRepository(UserTokenRepository);
+
   private mailProvider = new MailProvider();
 
   public async execute({ email, urlHostToSendMail }: IRequest): Promise<void> {

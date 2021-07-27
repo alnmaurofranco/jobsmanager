@@ -8,15 +8,19 @@ class UserTokenRepository extends Repository<UserToken> {
       user_id,
     });
 
-    return await this.save(userToken);
+    await this.save(userToken);
+
+    return userToken;
   }
 
   public async findByToken(token: string): Promise<UserToken | undefined> {
-    return await this.findOne({
+    const userToken = await this.findOne({
       where: {
         token,
       },
     });
+
+    return userToken;
   }
 }
 

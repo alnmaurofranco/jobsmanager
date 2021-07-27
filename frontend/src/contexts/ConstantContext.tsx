@@ -1,4 +1,4 @@
-import { createContext, useContext, useCallback } from 'react'
+import { createContext, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { api } from '../services/api'
 import Swal from 'sweetalert2'

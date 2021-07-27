@@ -20,7 +20,9 @@ class DesativedProfileService {
     user.active = false;
     user.updated_at = new Date(Date.now());
 
-    return await this.userRepository.save(user);
+    await this.userRepository.save(user);
+
+    return user;
   }
 }
 

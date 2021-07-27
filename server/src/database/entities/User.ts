@@ -2,17 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
   OneToMany,
   OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { Exclude } from 'class-transformer';
 import Job from './Job';
 import UserProfile from './UserProfile';
-
-import { Exclude } from 'class-transformer';
 
 @Entity('users')
 class User {

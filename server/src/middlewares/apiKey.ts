@@ -9,6 +9,7 @@ export default function apiKey(
   res: Response,
   next: NextFunction
 ) {
+  // eslint-disable-next-line no-shadow
   const apiKey = req.get('X-API-KEY');
 
   if (apiKeys.has(apiKey)) {

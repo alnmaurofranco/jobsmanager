@@ -23,8 +23,6 @@ class ProfileController {
       name,
       avatar,
       email,
-      old_password,
-      password,
       monthly_budget,
       days_per_week,
       hours_per_day,
@@ -39,8 +37,6 @@ class ProfileController {
       name,
       avatar,
       email,
-      old_password,
-      password,
       monthly_budget,
       days_per_week,
       hours_per_day,
@@ -63,8 +59,6 @@ class ProfileController {
   public async updateToChangePassword(req: Request, res: Response) {
     const { id: user_id } = req.user;
     const { oldPassword, newPassword } = req.body;
-
-    console.log(`id: ${user_id} antiga: ${oldPassword} nova: ${newPassword}`);
 
     const updateUserPasswordService = new UpdateUserPasswordService();
 

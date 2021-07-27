@@ -19,8 +19,11 @@ interface IRequest {
 
 class SignupService {
   private usersRepository = getCustomRepository(UserRepository);
+
   private userProfilesRepository = getCustomRepository(UserProfileRepository);
+
   private userTokenRepository = getCustomRepository(UserTokenRepository);
+
   private mailProvider = new MailProvider();
 
   public async execute({

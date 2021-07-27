@@ -47,7 +47,9 @@ class UpdateUserService {
       user.password = await bcrypt.hash(password, 8);
     }
 
-    return await this.usersRepository.save(user);
+    await this.usersRepository.save(user);
+
+    return user;
   }
 }
 

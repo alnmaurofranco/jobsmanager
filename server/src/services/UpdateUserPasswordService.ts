@@ -2,7 +2,6 @@ import { getCustomRepository } from 'typeorm';
 import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import bcrypt from 'bcryptjs';
-import User from '@database/entities/User';
 
 interface IRequest {
   user_id: string;

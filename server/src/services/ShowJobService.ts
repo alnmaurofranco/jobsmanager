@@ -1,4 +1,4 @@
-import { getCustomRepository, getRepository, Repository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import Job from '@database/entities/Job';
 import HttpException from '@errors/httpException';
 import { JobRepository } from '@database/repositories/JobRepository';
@@ -17,6 +17,7 @@ interface IResponse {
 
 class ShowJobService {
   private jobsRepository = getCustomRepository(JobRepository);
+
   private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({ id, user_id }: IRequest): Promise<IResponse> {

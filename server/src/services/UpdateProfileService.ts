@@ -20,7 +20,9 @@ interface IRequest {
 
 class UpdateProfileService {
   private usersRepository = getCustomRepository(UserRepository);
+
   private userProfileRepository = getCustomRepository(UserProfileRepository);
+
   private cacheProvider = new RedisCache();
 
   public async execute({

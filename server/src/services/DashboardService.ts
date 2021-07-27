@@ -11,12 +11,17 @@ interface IRequest {
 
 interface IResponse {
   jobs: Job[];
-  statusCount: Object;
+  statusCount: {
+    progress: number;
+    done: number;
+    total: number;
+  };
   freeHours: number;
 }
 
 class DashboardService {
   private jobsRepository = getCustomRepository(JobRepository);
+
   private usersRepository = getCustomRepository(UserRepository);
 
   public async execute({ user_id }: IRequest): Promise<IResponse> {
@@ -39,7 +44,7 @@ class DashboardService {
     };
 
     // total de horas por dia de cada job em progress
-    let jobTotalHours: number = 0;
+    let jobTotalHours = 0;
 
     const updatedJobs = jobs.map((job) => {
       const remaining = remainingDays(job);

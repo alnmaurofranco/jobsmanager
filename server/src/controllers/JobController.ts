@@ -33,7 +33,7 @@ class JobController {
 
   public async show(req: Request, res: Response) {
     const { id: user_id } = req.user;
-    const params = req.params;
+    const { params } = req;
     const id = Number(params.id);
 
     const showJobService = new ShowJobService();
@@ -45,7 +45,7 @@ class JobController {
 
   public async update(req: Request, res: Response) {
     const { id: user_id } = req.user;
-    const params = req.params;
+    const { params } = req;
     const id = Number(params.id);
     const { name, daily_hours, total_hours } = req.body;
 
@@ -64,7 +64,7 @@ class JobController {
 
   public async delete(req: Request, res: Response) {
     const { id: user_id } = req.user;
-    const params = req.params;
+    const { params } = req;
     const id = Number(params.id);
 
     const deleteJobService = new DeleteJobService();

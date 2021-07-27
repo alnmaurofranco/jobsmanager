@@ -10,13 +10,14 @@ interface IRequest {
 
 class FindAllJobsService {
   private jobsRepository = getCustomRepository(JobRepository);
+
   private cacheProvider = new RedisCache();
 
   public async execute({ user_id }: IRequest): Promise<Job[]> {
     let jobs = await this.cacheProvider.recover<Job[]>(`jobs-list:${user_id}`);
 
     if (!jobs) {
-      const jobs = await this.jobsRepository.find({
+      jobs = await this.jobsRepository.find({
         where: {
           user_id,
         },

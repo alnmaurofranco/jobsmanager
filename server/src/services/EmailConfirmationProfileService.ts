@@ -9,6 +9,7 @@ interface IRequest {
 
 class EmailConfirmationProfileService {
   private userRepository = getCustomRepository(UserRepository);
+
   private userTokenRepository = getCustomRepository(UserTokenRepository);
 
   public async execute({ token }: IRequest): Promise<void> {

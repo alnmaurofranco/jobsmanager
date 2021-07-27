@@ -14,6 +14,7 @@ interface IRequest {
 
 class CreateUserService {
   private usersRepository = getCustomRepository(UserRepository);
+
   private cacheProvider = new RedisCache();
 
   public async execute({

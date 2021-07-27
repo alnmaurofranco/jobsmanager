@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
-import User from './User';
 import { Exclude } from 'class-transformer';
+import User from './User';
 
 @Entity('users_profile')
 class UserProfile {

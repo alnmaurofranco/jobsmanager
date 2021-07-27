@@ -1,8 +1,8 @@
 import { UserRepository } from '@database/repositories/UserRepository';
 import HttpException from '@errors/httpException';
 import { getCustomRepository } from 'typeorm';
-import RedisCache from '../implementations/RedisCache';
 import User from '@database/entities/User';
+import RedisCache from '../implementations/RedisCache';
 
 interface IRequest {
   user_id: string;
@@ -10,6 +10,7 @@ interface IRequest {
 
 class ShowProfileService {
   private usersRepository = getCustomRepository(UserRepository);
+
   private cacheProvider = new RedisCache();
 
   public async execute({ user_id }: IRequest): Promise<User> {

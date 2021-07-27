@@ -1,11 +1,11 @@
-import HttpException from "./httpException";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
+import HttpException from './httpException';
 
 export const errorHandler = (
   error: HttpException,
-  request: Request,
+  _request: Request,
   response: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   const status = error.statusCode || 500;
   const message =
