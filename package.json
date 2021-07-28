@@ -9,6 +9,7 @@
     "style:format:web": "cd frontend && yarn prettier --check .",
     "style:format:api": "cd server && yarn prettier --check .",
     "style:lint:web": "cd frontend && yarn next lint",
-    "style:lint:api": "cd server && yarn eslint ."
+    "style:lint:api": "cd server && yarn eslint .",
+    "styles:all": "yarn style:format:web && yarn style:format:api && yarn style:lint:web && yarn style:lint:api"
   }
 }
