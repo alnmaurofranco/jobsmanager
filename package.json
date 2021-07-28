@@ -1,0 +1,14 @@
+{
+  "name": "jobsmanager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:alnmaurofranco/jobsmanager.git",
+  "author": "alnmaurofranco <alanmfrancodev@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "style:format:web": "cd frontend && yarn prettier --check .",
+    "style:format:api": "cd server && yarn prettier --check .",
+    "style:lint:web": "cd frontend && yarn next lint",
+    "style:lint:api": "cd server && yarn eslint ."
+  }
+}
