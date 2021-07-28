@@ -2,44 +2,23 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "lib": [
-      "ES6"
-    ],
+    "lib": ["ES6"],
     "allowJs": false,
     "outDir": "./dist",
     "rootDir": ".",
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "@database/*": [
-        "./src/database/*"
-      ],
-      "@views/*": [
-        "./src/views/*"
-      ],
-      "@services/*": [
-        "./src/services/*"
-      ],
-      "@controllers/*": [
-        "./src/controllers/*"
-      ],
-      "@config/*": [
-        "./src/config/*"
-      ],
-      "@errors/*": [
-        "./src/errors/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@middlewares/*": [
-        "./src/middlewares/*"
-      ],
+      "@database/*": ["database/*"],
+      "@views/*": ["views/*"],
+      "@services/*": ["services/*"],
+      "@controllers/*": ["controllers/*"],
+      "@config/*": ["config/*"],
+      "@errors/*": ["errors/*"],
+      "@utils/*": ["utils/*"],
+      "@middlewares/*": ["middlewares/*"]
     },
     "removeComments": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/@types"
-    ],
+    "typeRoots": ["./node_modules/@types", "./src/@types"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,

@@ -6,3 +6,4 @@ build
 public
 src/database/migrations
 jest.config.ts
+*.md

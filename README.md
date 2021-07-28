@@ -21,12 +21,13 @@ O JobsManager é uma plataforma de estimativa de cálculo para projetos freelanc
 ## 🚀 Tecnologias
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-* React
-* Next.js
-* Typescript
-* Node.js
-* Express.js
-* PostgreSQL
+* [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+* [Next.js](https://nextjs.org/) - The React Framework
+for Production
+* [Typescript](https://www.typescriptlang.org/) - Typed JavaScript at Any Scale.
+* [Node.js](https://nodejs.org/en/) - A JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [Express.js](http://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
+* [PostgreSQL](https://www.postgresql.org/) - The World's Most Advanced Open Source Relational Database
 
 ## 🎉 Funcionalidades
 * PWA - Progressive Web App ✅
